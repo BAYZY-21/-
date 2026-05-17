@@ -1,1401 +1,1108 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IoT Quiz Solutions | انترنت الأشياء | Tikrit University 2025–2026</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<title>نظرية الاحتمالات والإحصاء</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
 <style>
-/* ═══════════════════════════════════════════
-   DESIGN SYSTEM — Industrial Dark Academic
-   Font: Syne + Cairo (Arabic) + Space Mono
-═══════════════════════════════════════════ */
-:root {
-  --bg:         #060a12;
-  --bg2:        #0b1120;
-  --bg3:        #0f1829;
-  --bg4:        #141f35;
-  --panel:      #0d1726;
-  --border:     #1c2d48;
-  --border2:    #243a5a;
-  --teal:       #00d4c8;
-  --teal-dim:   rgba(0,212,200,0.15);
-  --teal-glow:  rgba(0,212,200,0.06);
-  --amber:      #f5a623;
-  --amber-dim:  rgba(245,166,35,0.15);
-  --blue:       #4a9eff;
-  --green:      #2dd4a0;
-  --green-dim:  rgba(45,212,160,0.12);
-  --red:        #ff5e6c;
-  --red-dim:    rgba(255,94,108,0.12);
-  --purple:     #a78bfa;
-  --text:       #d8e4f5;
-  --text2:      #8ba3c4;
-  --text3:      #4d6585;
-  --white:      #ffffff;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{
-  background:var(--bg);color:var(--text);
-  font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden;
-}
-body::before{
-  content:'';position:fixed;inset:0;
-  background-image:linear-gradient(rgba(0,212,200,0.03) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,212,200,0.03) 1px,transparent 1px);
-  background-size:48px 48px;pointer-events:none;z-index:0;
-}
+  :root {
+    --gold: #c9a227;
+    --gold-light: #f0c94a;
+    --gold-dark: #8a6d0d;
+    --navy: #0e1628;
+    --navy-mid: #1a2744;
+    --navy-light: #253560;
+    --cream: #fdf6e3;
+    --text: #e8dcc8;
+    --accent: #4a9eff;
+    --red: #e05a5a;
+    --green: #4caf84;
+    --border: rgba(201,162,39,0.25);
+  }
 
-/* ── HEADER ── */
-header{
-  position:sticky;top:0;z-index:100;
-  background:rgba(6,10,18,0.97);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(12px);
-}
-.header-inner{
-  max-width:1200px;margin:0 auto;padding:0 1.5rem;
-  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
-}
-.logo{display:flex;align-items:center;gap:12px;padding:12px 0;}
-.logo-icon{
-  width:38px;height:38px;border:2px solid var(--teal);border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:1.1rem;color:var(--teal);background:var(--teal-glow);flex-shrink:0;
-}
-.logo-text h1{font-size:.95rem;font-weight:800;letter-spacing:.05em;color:var(--white);text-transform:uppercase;line-height:1.2;}
-.logo-text p{font-size:.65rem;color:var(--text3);font-family:'Space Mono',monospace;letter-spacing:.08em;}
-.nav-tabs{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;}
-.nav-tabs::-webkit-scrollbar{display:none;}
-.tab-btn{
-  padding:14px 16px;background:none;border:none;
-  border-bottom:2px solid transparent;color:var(--text3);cursor:pointer;
-  font-family:'Syne',sans-serif;font-size:.75rem;font-weight:700;
-  letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;
-  transition:all .2s;
-}
-.tab-btn:hover{color:var(--text);background:rgba(255,255,255,0.02);}
-.tab-btn.active{color:var(--teal);border-bottom-color:var(--teal);}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* ── HERO ── */
-.hero{
-  position:relative;z-index:5;
-  background:linear-gradient(135deg,#070d1a 0%,#0b1528 50%,#070d1a 100%);
-  border-bottom:1px solid var(--border);padding:2.5rem 1.5rem;text-align:center;
-  overflow:hidden;
-}
-.hero::after{
-  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:600px;height:300px;
-  background:radial-gradient(ellipse,rgba(0,212,200,0.07) 0%,transparent 70%);
-  pointer-events:none;
-}
-.hero h2{
-  font-size:clamp(1.5rem,4vw,2.4rem);font-weight:800;
-  color:var(--white);letter-spacing:-.02em;line-height:1.15;
-  position:relative;z-index:1;
-}
-.hero h2 span{color:var(--teal);}
-.hero-ar{
-  font-family:'Cairo',sans-serif;font-size:1rem;color:var(--text2);
-  margin-top:.5rem;font-weight:400;direction:rtl;position:relative;z-index:1;
-}
-.hero-meta{display:flex;gap:20px;justify-content:center;margin-top:1.2rem;flex-wrap:wrap;position:relative;z-index:1;}
-.meta-item{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--text3);letter-spacing:.06em;display:flex;align-items:center;gap:6px;}
-.meta-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
 
-/* ── MAIN ── */
-main{position:relative;z-index:5;max-width:1160px;margin:0 auto;padding:2rem 1.5rem 6rem;}
-.section{display:none;animation:fadeIn .3s ease;}
-.section.active{display:block;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  /* === HEADER === */
+  header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 50%, var(--navy) 100%);
+    border-bottom: 2px solid var(--gold);
+    padding: 40px 20px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,162,39,0.12) 0%, transparent 70%);
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(201,162,39,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold-light);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    padding: 6px 20px;
+    border-radius: 2px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+  header h1 {
+    font-family: 'Amiri', serif;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    color: var(--gold-light);
+    font-weight: 700;
+    line-height: 1.3;
+    position: relative;
+  }
+  header p {
+    margin-top: 10px;
+    color: rgba(232,220,200,0.6);
+    font-size: 0.9rem;
+    position: relative;
+  }
 
-/* ── QUIZ HEADER ── */
-.quiz-header{
-  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
-  background:var(--bg3);border:1px solid var(--border);border-radius:12px;
-  padding:18px 22px;margin-bottom:24px;position:relative;overflow:hidden;
-}
-.quiz-header::before{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--teal);
-}
-.qh-left{flex:1;}
-.quiz-num{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--teal);letter-spacing:.1em;text-transform:uppercase;font-weight:700;}
-.quiz-title{font-size:.95rem;font-weight:700;color:var(--white);margin-top:2px;}
-.quiz-date{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--text3);letter-spacing:.06em;}
+  /* === NAV === */
+  nav {
+    background: var(--navy-mid);
+    border-bottom: 1px solid var(--border);
+    padding: 0 16px;
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .nav-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: rgba(232,220,200,0.55);
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.82rem;
+    padding: 14px 16px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.25s;
+    white-space: nowrap;
+  }
+  .nav-btn:hover { color: var(--gold-light); }
+  .nav-btn.active {
+    color: var(--gold-light);
+    border-bottom-color: var(--gold);
+  }
 
-/* ── QUESTION CARD ── */
-.q-card{background:var(--panel);border:1px solid var(--border);border-radius:10px;margin-bottom:16px;overflow:hidden;}
-.q-head{
-  display:flex;align-items:center;gap:12px;padding:12px 18px;
-  background:var(--bg4);border-bottom:1px solid var(--border);flex-wrap:wrap;
-}
-.q-tag{font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;padding:3px 9px;border-radius:4px;flex-shrink:0;}
-.tag-q   {background:rgba(0,212,200,0.12);  color:var(--teal);}
-.tag-tf  {background:rgba(245,166,35,0.12); color:var(--amber);}
-.tag-fill{background:rgba(74,158,255,0.12); color:var(--blue);}
-.tag-mcq {background:rgba(167,139,250,0.12);color:var(--purple);}
-.tag-des {background:rgba(45,212,160,0.12); color:var(--green);}
-.tag-arch{background:rgba(255,94,108,0.12); color:var(--red);}
-.q-head-title{font-size:.88rem;font-weight:700;color:var(--white);flex:1;}
-.q-head-ar{font-family:'Cairo',sans-serif;direction:rtl;font-size:.82rem;color:var(--text2);}
-.q-body{padding:18px 20px;}
+  /* === MAIN === */
+  main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 16px 60px;
+  }
 
-/* ── T/F ── */
-.tf-list{display:flex;flex-direction:column;gap:9px;}
-.tf-item{
-  display:grid;grid-template-columns:26px 1fr auto;gap:10px;align-items:start;
-  padding:11px 13px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);
-}
-.tf-num{font-family:'Space Mono',monospace;font-size:.73rem;color:var(--teal);font-weight:700;padding-top:1px;}
-.tf-q{font-size:.84rem;color:var(--text);line-height:1.55;}
-.tf-ans{
-  padding:3px 10px;border-radius:4px;font-size:.72rem;font-weight:700;
-  font-family:'Space Mono',monospace;letter-spacing:.04em;white-space:nowrap;flex-shrink:0;
-}
-.ans-T{background:var(--green-dim);color:var(--green);border:1px solid rgba(45,212,160,.3);}
-.ans-F{background:var(--red-dim);  color:var(--red);  border:1px solid rgba(255,94,108,.3);}
-.tf-fix{
-  grid-column:2/-1;font-size:.79rem;color:var(--amber);
-  background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.2);
-  border-right:3px solid var(--amber);border-radius:6px;padding:8px 12px;
-  line-height:1.55;margin-top:3px;
-}
-.summary-strip{
-  display:flex;flex-wrap:wrap;gap:5px;padding:10px 12px;
-  background:var(--bg4);border:1px solid var(--border);border-radius:7px;margin-bottom:12px;
-}
-.chip{padding:3px 9px;border-radius:4px;font-family:'Space Mono',monospace;font-size:.7rem;font-weight:700;border:1px solid;}
-.chip-t{color:var(--green);border-color:rgba(45,212,160,.3);background:var(--green-dim);}
-.chip-f{color:var(--red);  border-color:rgba(255,94,108,.3);background:var(--red-dim);}
+  /* === SECTIONS === */
+  .section { display: none; animation: fadeIn 0.4s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform: none; } }
 
-/* ── FILL ── */
-.fill-list{display:flex;flex-direction:column;gap:9px;}
-.fill-item{display:grid;grid-template-columns:26px 1fr;gap:10px;align-items:start;padding:11px 13px;border-radius:7px;border:1px solid var(--border);background:var(--bg3);}
-.fill-num{font-family:'Space Mono',monospace;font-size:.73rem;color:var(--blue);font-weight:700;padding-top:2px;}
-.fill-q{font-size:.83rem;color:var(--text2);line-height:1.5;margin-bottom:5px;}
-.fill-ans{font-size:.87rem;color:var(--green);font-weight:700;display:flex;align-items:center;gap:7px;flex-wrap:wrap;}
-.fill-ans::before{content:'→';color:var(--teal);font-family:'Space Mono',monospace;}
-.fill-note{font-size:.76rem;color:var(--text3);margin-top:3px;line-height:1.45;font-style:italic;}
+  /* === CARDS === */
+  .card {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .card:hover { border-color: rgba(201,162,39,0.5); }
 
-/* ── MCQ ── */
-.mcq-list{display:flex;flex-direction:column;gap:13px;}
-.mcq-item{padding:13px 15px;border-radius:8px;border:1px solid var(--border);background:var(--bg3);}
-.mcq-n{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--purple);font-weight:700;margin-bottom:5px;}
-.mcq-q{font-size:.84rem;color:var(--text);font-weight:600;margin-bottom:9px;line-height:1.5;}
-.mcq-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:5px;}
-.mcq-opt{padding:7px 11px;border-radius:6px;font-size:.79rem;border:1px solid var(--border);color:var(--text2);background:var(--bg4);}
-.mcq-opt.ok{background:var(--green-dim);border-color:rgba(45,212,160,.4);color:var(--green);font-weight:700;}
-.mcq-opt.ok::after{content:' ✓';font-weight:900;}
-.mcq-note{font-size:.76rem;color:var(--text3);margin-top:7px;line-height:1.45;font-style:italic;}
+  .card-header {
+    background: linear-gradient(90deg, rgba(201,162,39,0.12), transparent);
+    border-bottom: 1px solid var(--border);
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .card-icon {
+    width: 38px; height: 38px;
+    background: rgba(201,162,39,0.15);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--gold-light);
+  }
+  .card-subtitle {
+    font-size: 0.78rem;
+    color: rgba(232,220,200,0.5);
+    margin-top: 2px;
+  }
+  .card-body { padding: 22px; }
 
-/* ── DATA TABLE ── */
-.dtable{width:100%;border-collapse:collapse;font-size:.82rem;margin:10px 0;font-family:'Space Mono',monospace;}
-.dtable th{background:rgba(0,212,200,.1);color:var(--teal);padding:9px 13px;text-align:left;font-weight:700;border:1px solid var(--border);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;}
-.dtable td{padding:9px 13px;border:1px solid var(--border);color:var(--text);vertical-align:top;line-height:1.5;}
-.dtable tr:nth-child(even) td{background:rgba(255,255,255,.02);}
-.dtable .ac{color:var(--green);font-weight:700;}
-.dtable .qc{color:var(--text2);}
+  /* === LAW BOX === */
+  .law-box {
+    background: rgba(74,158,255,0.06);
+    border: 1px solid rgba(74,158,255,0.25);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 14px 0;
+  }
+  .law-box .law-label {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .law-box .formula {
+    font-size: 1rem;
+    color: #fff;
+    line-height: 1.9;
+    direction: ltr;
+    text-align: center;
+  }
 
-/* ── SCENARIO ── */
-.scenario{
-  background:linear-gradient(135deg,rgba(0,212,200,.04),rgba(74,158,255,.04));
-  border:1px solid var(--border2);border-radius:10px;padding:16px 18px;margin-bottom:14px;
-}
-.scenario-lbl{font-family:'Space Mono',monospace;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin-bottom:7px;}
-.scenario-en{font-size:.84rem;color:var(--text);line-height:1.6;}
-.scenario-ar{font-family:'Cairo',sans-serif;direction:rtl;font-size:.86rem;color:var(--text2);margin-top:7px;line-height:1.65;padding-top:7px;border-top:1px solid var(--border);}
-.design-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:11px;margin-top:12px;}
-.d-card{background:var(--bg4);border:1px solid var(--border);border-radius:8px;padding:13px 15px;}
-.d-num{font-family:'Space Mono',monospace;font-size:.67rem;color:var(--amber);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;}
-.d-q{font-size:.81rem;color:var(--text2);margin-bottom:7px;line-height:1.4;}
-.d-ans{font-size:.87rem;color:var(--green);font-weight:700;padding:5px 10px;background:var(--green-dim);border-radius:5px;border:1px solid rgba(45,212,160,.2);}
-.d-why{font-size:.77rem;color:var(--text3);margin-top:5px;line-height:1.45;}
+  /* === WHEN-TO-USE === */
+  .when-box {
+    background: rgba(76,175,132,0.07);
+    border-right: 3px solid var(--green);
+    border-radius: 0 8px 8px 0;
+    padding: 12px 16px;
+    margin: 12px 0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: rgba(232,220,200,0.85);
+  }
+  .when-box strong { color: var(--green); display: block; margin-bottom: 4px; font-size: 0.8rem; letter-spacing: 1px; }
 
-/* ── SECTION DIVIDER ── */
-.sdiv{display:flex;align-items:center;gap:10px;margin:20px 0 14px;}
-.sdiv-line{flex:1;height:1px;background:var(--border);}
-.sdiv-txt{font-family:'Space Mono',monospace;font-size:.67rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);white-space:nowrap;}
-.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:20px 0;}
+  /* === AXIOM LIST === */
+  .axiom-item {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 18px;
+    align-items: flex-start;
+  }
+  .axiom-num {
+    min-width: 34px; height: 34px;
+    background: var(--gold-dark);
+    color: var(--cream);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+    font-size: 0.85rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .axiom-content { flex: 1; }
+  .axiom-content p { font-size: 0.9rem; line-height: 1.7; color: rgba(232,220,200,0.85); }
 
-/* ── CODE BLOCK ── */
-.code-block{
-  background:var(--bg2);border:1px solid var(--border);border-radius:8px;
-  padding:14px 16px;font-family:'Space Mono',monospace;font-size:.77rem;
-  color:var(--text2);line-height:2;overflow-x:auto;margin:10px 0;
-}
-.code-block .kw{color:var(--teal);}
-.code-block .val{color:var(--amber);}
-.code-block .cm{color:var(--text3);}
+  /* === PROBLEM SECTION === */
+  .problem-box {
+    background: rgba(224,90,90,0.07);
+    border: 1px solid rgba(224,90,90,0.25);
+    border-radius: 8px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+  }
+  .problem-box .prob-label {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    color: var(--red);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .problem-box p { font-size: 0.9rem; line-height: 1.8; }
 
-/* ── INFO BOX ── */
-.info-box{padding:12px 15px;border-radius:8px;font-size:.82rem;line-height:1.6;margin:10px 0;}
-.info-green{background:var(--green-dim);border:1px solid rgba(45,212,160,.25);border-right:3px solid var(--green);color:var(--text);}
-.info-amber{background:var(--amber-dim);border:1px solid rgba(245,166,35,.25);border-right:3px solid var(--amber);color:var(--text);}
-.info-blue {background:rgba(74,158,255,.1); border:1px solid rgba(74,158,255,.25);border-right:3px solid var(--blue);color:var(--text);}
+  .solution-toggle {
+    background: rgba(201,162,39,0.1);
+    border: 1px solid var(--gold-dark);
+    color: var(--gold-light);
+    font-family: 'Cairo', sans-serif;
+    font-size: 0.85rem;
+    padding: 10px 22px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .solution-toggle:hover {
+    background: rgba(201,162,39,0.2);
+    border-color: var(--gold);
+  }
+  .solution-toggle .arrow { transition: transform 0.3s; }
+  .solution-toggle.open .arrow { transform: rotate(90deg); }
 
-/* ── FOOTER ── */
-footer{
-  position:relative;z-index:5;border-top:1px solid var(--border);
-  background:var(--bg2);padding:1.5rem 2rem;text-align:center;
-}
-.footer-grid{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;align-items:center;margin-bottom:1rem;}
-.footer-sep{width:1px;height:28px;background:var(--border);}
-.footer-item-lbl{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px;}
-.footer-item-val{font-family:'Cairo',sans-serif;font-size:.85rem;color:var(--text2);}
-.footer-copy{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--text3);letter-spacing:.05em;}
+  .solution-body {
+    display: none;
+    background: rgba(14,22,40,0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 16px;
+    animation: fadeIn 0.3s ease;
+  }
+  .solution-body.show { display: block; }
 
-@media(max-width:640px){
-  .header-inner{flex-direction:column;align-items:flex-start;gap:.5rem;}
-  .mcq-opts{grid-template-columns:1fr;}
-  .design-grid{grid-template-columns:1fr;}
-  .tf-item{grid-template-columns:22px 1fr;}
-  .tf-ans{grid-column:2;justify-self:start;margin-top:3px;}
-}
+  .step {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+  .step-num {
+    background: rgba(201,162,39,0.2);
+    color: var(--gold-light);
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .step-content { font-size: 0.88rem; line-height: 1.8; color: rgba(232,220,200,0.85); flex: 1; }
+  .step-content .math-line {
+    direction: ltr;
+    text-align: left;
+    background: rgba(255,255,255,0.04);
+    border-radius: 4px;
+    padding: 6px 12px;
+    margin: 6px 0;
+    font-size: 0.85rem;
+  }
+
+  .answer-box {
+    background: rgba(76,175,132,0.1);
+    border: 1px solid rgba(76,175,132,0.3);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    color: #7ed4aa;
+    margin-top: 12px;
+  }
+  .answer-box strong { color: var(--green); }
+
+  /* === TABLE === */
+  .prob-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    margin: 12px 0;
+    direction: rtl;
+  }
+  .prob-table th {
+    background: rgba(201,162,39,0.15);
+    color: var(--gold-light);
+    padding: 10px 14px;
+    text-align: center;
+    border: 1px solid var(--border);
+  }
+  .prob-table td {
+    padding: 9px 14px;
+    text-align: center;
+    border: 1px solid rgba(201,162,39,0.1);
+  }
+  .prob-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+  /* === HIGHLIGHTS === */
+  .highlight { color: var(--gold-light); font-weight: 600; }
+  .highlight-blue { color: var(--accent); font-weight: 600; }
+  .highlight-green { color: var(--green); font-weight: 600; }
+  .highlight-red { color: var(--red); font-weight: 600; }
+
+  /* === SUMMARY CHIPS === */
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+  .chip {
+    background: rgba(201,162,39,0.12);
+    border: 1px solid rgba(201,162,39,0.3);
+    color: var(--gold-light);
+    font-size: 0.78rem;
+    padding: 5px 14px;
+    border-radius: 20px;
+    direction: ltr;
+  }
+
+  /* === DIVIDER === */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+    margin: 24px 0;
+  }
+
+  /* === RESPONSIVE === */
+  @media (max-width: 600px) {
+    .card-body { padding: 16px; }
+    .card-header { padding: 14px 16px; }
+    .law-box .formula { font-size: 0.88rem; }
+    .step-content { font-size: 0.84rem; }
+  }
+
+  /* === PROGRESS DOTS === */
+  .progress-bar {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    padding: 16px 0 0;
+  }
+  .p-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(201,162,39,0.25);
+    transition: background 0.3s;
+  }
+  .p-dot.active { background: var(--gold); }
 </style>
 </head>
 <body>
 
-<!-- ══════════════ HEADER ══════════════ -->
 <header>
-  <div class="header-inner">
-    <div class="logo">
-      <div class="logo-icon">📡</div>
-      <div class="logo-text">
-        <h1>IoT — Quiz Solutions</h1>
-        <p>TIKRIT UNIVERSITY · CS DEPT · 3RD STAGE · 2025–2026</p>
-      </div>
-    </div>
-    <nav class="nav-tabs">
-      <button class="tab-btn active"  onclick="go('q1')">Quiz 1 · 11/03</button>
-      <button class="tab-btn"         onclick="go('q2')">Quiz 2 · 08/04</button>
-      <button class="tab-btn"         onclick="go('q3')">Quiz 3A · 15/04</button>
-      <button class="tab-btn"         onclick="go('q4')">Quiz 3B · 15/04</button>
-      <button class="tab-btn"         onclick="go('q5')">Quiz 3C · 15/04</button>
-      <button class="tab-btn"         onclick="go('q6')">DQ3 · 29/04</button>
-      <button class="tab-btn"         onclick="go('ref')">📋 Reference</button>
-      <button class="tab-btn"         onclick="go('dep')">🚀 Deploy</button>
-    </nav>
-  </div>
+  <div class="header-badge">نظرية الاحتمالات والإحصاء</div>
+  <h1>القوانين والمسائل المحلولة</h1>
+  <p>Kahlan AL-Juburi — Spring 2026</p>
 </header>
 
-<!-- ══════════════ HERO ══════════════ -->
-<div class="hero">
-  <h2>Complete <span>Answered</span> Solutions</h2>
-  <p class="hero-ar">حلول شاملة لأسئلة مادة انترنت الأشياء — نظري — الفصل الثاني 2025/2026</p>
-  <div class="hero-meta">
-    <span class="meta-item"><span class="meta-dot"></span>6 Quizzes — All Answered</span>
-    <span class="meta-item"><span class="meta-dot"></span>Bilingual EN / AR</span>
-    <span class="meta-item"><span class="meta-dot"></span>T/F · MCQ · Fill · Design</span>
-    <span class="meta-item"><span class="meta-dot"></span>Reference Card + GitHub Deploy</span>
-  </div>
-</div>
+<nav id="mainNav">
+  <button class="nav-btn active" onclick="showSection('laws', this)">القوانين</button>
+  <button class="nav-btn" onclick="showSection('axioms', this)">مسلّمات كولموغوروف</button>
+  <button class="nav-btn" onclick="showSection('conditional', this)">الاحتمال الشرطي</button>
+  <button class="nav-btn" onclick="showSection('independence', this)">الاستقلالية</button>
+  <button class="nav-btn" onclick="showSection('total', this)">قانون الاحتمال الكلي</button>
+  <button class="nav-btn" onclick="showSection('bayes', this)">قاعدة بايز</button>
+  <button class="nav-btn" onclick="showSection('problems', this)">المسائل المحلولة</button>
+</nav>
 
 <main>
 
-<!-- ══════════════════════════════════════════════════════════
-     Q1 — Daily Quiz A & B   2026/03/11
-══════════════════════════════════════════════════════════ -->
-<div id="q1" class="section active">
-  <div class="quiz-header">
-    <div class="qh-left">
-      <div class="quiz-num">Daily Quiz — A &amp; B</div>
-      <div class="quiz-title">IoT Architecture · Sensors · Actuators · 3-Layer Model</div>
-    </div>
-    <div class="quiz-date">2026 / 03 / 11</div>
-  </div>
+<!-- ======================== SECTION: LAWS SUMMARY ======================== -->
+<div id="laws" class="section active">
 
-  <!-- ─ SECTION A ─ -->
-  <div class="sdiv"><div class="sdiv-line"></div><span class="sdiv-txt">Section A</span><div class="sdiv-line"></div></div>
-
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-tf">Q1-A</span><span class="q-head-title">True or False</span><span class="q-head-ar">صح أم خطأ</span></div>
-    <div class="q-body">
-      <div class="summary-strip">
-        <span class="chip chip-t">1-T</span><span class="chip chip-f">2-F</span><span class="chip chip-f">3-F</span>
-        <span class="chip chip-t">4-T</span><span class="chip chip-f">5-F</span><span class="chip chip-t">6-T</span>
-      </div>
-      <div class="tf-list">
-
-        <div class="tf-item">
-          <span class="tf-num">1</span>
-          <span class="tf-q">IoT devices must have internet connectivity to be part of an IoT ecosystem.</span>
-          <span class="tf-ans ans-T">TRUE</span>
-        </div>
-
-        <div class="tf-item">
-          <span class="tf-num">2</span>
-          <span class="tf-q">A traditional washing machine is an example of an IoT system.</span>
-          <span class="tf-ans ans-F">FALSE</span>
-          <div class="tf-fix">✎ A traditional washing machine is an <strong>Embedded System</strong> — it has no internet connectivity or remote communication. An IoT washing machine would connect to Wi-Fi and be controllable via app.</div>
-        </div>
-
-        <div class="tf-item">
-          <span class="tf-num">3</span>
-          <span class="tf-q">Sensors are responsible for taking physical actions like opening a valve.</span>
-          <span class="tf-ans ans-F">FALSE</span>
-          <div class="tf-fix">✎ That is the role of <strong>Actuators</strong>. Sensors only detect/measure physical conditions (heat, light, pressure) and convert them into data signals.</div>
-        </div>
-
-        <div class="tf-item">
-          <span class="tf-num">4</span>
-          <span class="tf-q">The Perception Layer is the physical foundation of the IoT architecture.</span>
-          <span class="tf-ans ans-T">TRUE</span>
-        </div>
-
-        <div class="tf-item">
-          <span class="tf-num">5</span>
-          <span class="tf-q">The 3-Layer Architecture is the most suitable model for Smart Cities.</span>
-          <span class="tf-ans ans-F">FALSE</span>
-          <div class="tf-fix">✎ Smart Cities require the more detailed <strong>5-Layer Architecture</strong> (or SOA-based model) due to the complexity, scale, and diverse services involved.</div>
-        </div>
-
-        <div class="tf-item">
-          <span class="tf-num">6</span>
-          <span class="tf-q">Actuators allow machines to interact with the physical world.</span>
-          <span class="tf-ans ans-T">TRUE</span>
-        </div>
-
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">📐</div>
+      <div>
+        <div class="card-title">ملخص جميع القوانين</div>
+        <div class="card-subtitle">نظرة سريعة على كل المعادلات الأساسية</div>
       </div>
     </div>
-  </div>
+    <div class="card-body">
 
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-fill">Q2-A</span><span class="q-head-title">Fill the Blanks</span><span class="q-head-ar">أكمل الفراغات</span></div>
-    <div class="q-body">
-      <div class="fill-list">
-        <div class="fill-item"><span class="fill-num">1</span><div>
-          <div class="fill-q">A system designed to perform a specific task within a larger device is called ___</div>
-          <div class="fill-ans">Embedded System &nbsp;<span style="font-family:'Cairo',sans-serif;color:var(--text2);font-size:.85rem;">(نظام مدمج)</span></div>
-          <div class="fill-note">A dedicated computing system built into a larger mechanical or electronic system for a specific function</div>
-        </div></div>
-        <div class="fill-item"><span class="fill-num">2</span><div>
-          <div class="fill-q">Devices that detect environmental changes like heat or light are ___</div>
-          <div class="fill-ans">Sensors &nbsp;<span style="font-family:'Cairo',sans-serif;color:var(--text2);font-size:.85rem;">(المستشعرات / الحساسات)</span></div>
-        </div></div>
-        <div class="fill-item"><span class="fill-num">3</span><div>
-          <div class="fill-q">The ___ Layer is the bridge that turns an embedded system into an IoT system.</div>
-          <div class="fill-ans">Network Layer &nbsp;<span style="font-family:'Cairo',sans-serif;color:var(--text2);font-size:.85rem;">(طبقة الشبكة)</span></div>
-          <div class="fill-note">It provides internet connectivity, enabling remote communication — converting a local embedded system into an IoT-connected device</div>
-        </div></div>
-        <div class="fill-item"><span class="fill-num">4</span><div>
-          <div class="fill-q">In the 5-layer model, the layer responsible for total system management is the ___ Layer.</div>
-          <div class="fill-ans">Business Layer &nbsp;<span style="font-family:'Cairo',sans-serif;color:var(--text2);font-size:.85rem;">(طبقة الأعمال)</span></div>
-          <div class="fill-note">Handles business models, decision-making policies, and total system management — the topmost layer</div>
-        </div></div>
-        <div class="fill-item"><span class="fill-num">5</span><div>
-          <div class="fill-q">Technologies like ___ are used to protect IoT devices from cyber threats.</div>
-          <div class="fill-ans">Encryption / Security &nbsp;<span style="font-family:'Cairo',sans-serif;color:var(--text2);font-size:.85rem;">(التشفير والأمان)</span></div>
-        </div></div>
+      <div class="law-box">
+        <div class="law-label">فضاء الاحتمال</div>
+        <div class="formula">\( (S,\; \mathcal{F},\; P) \)</div>
       </div>
-    </div>
-  </div>
+      <p style="font-size:.85rem;line-height:1.8;margin-bottom:16px;">
+        <span class="highlight">S</span> = فضاء العينة &nbsp;|&nbsp;
+        <span class="highlight">F</span> = فضاء الأحداث &nbsp;|&nbsp;
+        <span class="highlight">P</span> = مقياس الاحتمال
+      </p>
 
-  <div class="divider"></div>
-  <div class="sdiv"><div class="sdiv-line"></div><span class="sdiv-txt">Section B</span><div class="sdiv-line"></div></div>
+      <div class="divider"></div>
 
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-tf">Q1-B</span><span class="q-head-title">True or False</span></div>
-    <div class="q-body">
-      <div class="summary-strip">
-        <span class="chip chip-f">1-F</span><span class="chip chip-t">2-T</span><span class="chip chip-t">3-T</span>
-        <span class="chip chip-f">4-F</span><span class="chip chip-t">5-T</span><span class="chip chip-f">6-F</span>
-      </div>
-      <div class="tf-list">
-        <div class="tf-item">
-          <span class="tf-num">1</span>
-          <span class="tf-q">Bluetooth is considered a long-range communication technology.</span>
-          <span class="tf-ans ans-F">FALSE</span>
-          <div class="tf-fix">✎ Bluetooth is <strong>short-range</strong> (~10m standard, ~50m BLE). Long-range technologies include LoRaWAN (km range) and Cellular (4G/5G).</div>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">2</span>
-          <span class="tf-q">The Processing Layer acts as the "brain" for data filtering and storage.</span>
-          <span class="tf-ans ans-T">TRUE</span>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">3</span>
-          <span class="tf-q">The ultimate goal of IoT is automation and autonomous decision-making.</span>
-          <span class="tf-ans ans-T">TRUE</span>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">4</span>
-          <span class="tf-q">The Business Layer is responsible for user dashboards and graphs.</span>
-          <span class="tf-ans ans-F">FALSE</span>
-          <div class="tf-fix">✎ User dashboards belong to the <strong>Application Layer</strong>. The Business Layer manages business models, policies, and overall system governance.</div>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">5</span>
-          <span class="tf-q">Not every Embedded System is necessarily an IoT system.</span>
-          <span class="tf-ans ans-T">TRUE</span>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">6</span>
-          <span class="tf-q">"Middleware" is another name for the Network Layer.</span>
-          <span class="tf-ans ans-F">FALSE</span>
-          <div class="tf-fix">✎ Middleware is another name for the <strong>Processing Layer</strong> (also called Transport Layer in some models) — not the Network Layer.</div>
+      <div class="law-box">
+        <div class="law-label">مسلّمات كولموغوروف الثلاث</div>
+        <div class="formula">
+          1.&nbsp; \(P\{A\} \geq 0\) <br>
+          2.&nbsp; \(P\{S\} = 1\) <br>
+          3.&nbsp; \(P\left\{\bigcup_{i=1}^{k} A_i\right\} = \sum_{i=1}^{k} P\{A_i\}\) &nbsp; إذا كانت الأحداث غير متقاطعة
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-fill">Q2-B</span><span class="q-head-title">Fill the Blanks</span></div>
-    <div class="q-body">
-      <div class="fill-list">
-        <div class="fill-item"><span class="fill-num">1</span><div>
-          <div class="fill-q">The role of ___ is to convert digital signals into physical actions.</div>
-          <div class="fill-ans">Actuators &nbsp;<span style="font-family:'Cairo',sans-serif;color:var(--text2);font-size:.85rem;">(المحركات)</span></div>
-        </div></div>
-        <div class="fill-item"><span class="fill-num">2</span><div>
-          <div class="fill-q">The basic 3-layer architecture consists of ___, ___, and ___ Layers.</div>
-          <div class="fill-ans">Perception, Network, and Application Layers</div>
-        </div></div>
-        <div class="fill-item"><span class="fill-num">3</span><div>
-          <div class="fill-q">___ describes data processing that happens close to the device.</div>
-          <div class="fill-ans">Edge Computing &nbsp;<span style="font-family:'Cairo',sans-serif;color:var(--text2);font-size:.85rem;">(الحوسبة الحافية)</span></div>
-          <div class="fill-note">Reduces latency by processing data at the edge (near the source) rather than sending it to a distant cloud server</div>
-        </div></div>
-        <div class="fill-item"><span class="fill-num">4</span><div>
-          <div class="fill-q">The layer that provides services to the end-user via dashboards is the ___ Layer.</div>
-          <div class="fill-ans">Application Layer &nbsp;<span style="font-family:'Cairo',sans-serif;color:var(--text2);font-size:.85rem;">(طبقة التطبيقات)</span></div>
-        </div></div>
-        <div class="fill-item"><span class="fill-num">5</span><div>
-          <div class="fill-q">The ___ Layer is responsible for routing and addressing data.</div>
-          <div class="fill-ans">Network Layer &nbsp;<span style="font-family:'Cairo',sans-serif;color:var(--text2);font-size:.85rem;">(طبقة الشبكة)</span></div>
-        </div></div>
+      <div class="divider"></div>
+
+      <div class="law-box">
+        <div class="law-label">الاحتمال الشرطي</div>
+        <div class="formula">
+          \( P\{A \mid B\} = \dfrac{P\{A \cap B\}}{P\{B\}} \)
+        </div>
       </div>
+
+      <div class="law-box">
+        <div class="law-label">قاعدة الضرب</div>
+        <div class="formula">\( P\{A \cap B\} = P\{A \mid B\} \cdot P\{B\} = P\{B \mid A\} \cdot P\{A\} \)</div>
+      </div>
+
+      <div class="law-box">
+        <div class="law-label">الاستقلالية</div>
+        <div class="formula">\( A \perp B \iff P\{A \cap B\} = P\{A\} \cdot P\{B\} \)</div>
+      </div>
+
+      <div class="law-box">
+        <div class="law-label">قانون الاحتمال الكلي</div>
+        <div class="formula">\( P\{A\} = \sum_{i=1}^{k} P\{A \mid B_i\} \cdot P\{B_i\} \)</div>
+      </div>
+
+      <div class="law-box">
+        <div class="law-label">قاعدة بايز</div>
+        <div class="formula">
+          \( P\{B_j \mid A\} = \dfrac{P\{A \mid B_j\} \cdot P\{B_j\}}{\sum_{i=1}^{k} P\{A \mid B_i\} \cdot P\{B_i\}} \)
+        </div>
+      </div>
+
+      <div class="law-box">
+        <div class="law-label">احتمال الاتحاد (حدثان)</div>
+        <div class="formula">\( P\{A \cup B\} = P\{A\} + P\{B\} - P\{A \cap B\} \)</div>
+      </div>
+
+      <div class="law-box">
+        <div class="law-label">احتمال التكامل</div>
+        <div class="formula">\( P\{A\} = 1 - P\{\bar{A}\} \)</div>
+      </div>
+
     </div>
   </div>
 </div>
 
-
-<!-- ══════════════════════════════════════════════════════════
-     Q2 — Daily Quiz M   2026/04/08
-══════════════════════════════════════════════════════════ -->
-<div id="q2" class="section">
-  <div class="quiz-header">
-    <div class="qh-left">
-      <div class="quiz-num">Daily Quiz — M</div>
-      <div class="quiz-title">IoT 3-Layer Architecture Table + Fill Blanks</div>
-    </div>
-    <div class="quiz-date">2026 / 04 / 08</div>
-  </div>
-
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-fill">Q1</span><span class="q-head-title">Complete the IoT 3-Layer Architectural Model Table</span></div>
-    <div class="q-body">
-      <table class="dtable">
-        <thead><tr><th>Layer</th><th>Name</th><th>Primary Role</th><th>Key Components</th></tr></thead>
-        <tbody>
-          <tr>
-            <td>Layer 1</td>
-            <td class="ac">Perception Layer<br><small style="color:var(--text3);font-size:.68rem;">طبقة الإدراك</small></td>
-            <td class="ac">Collect data from the physical environment — sensing &amp; actuation</td>
-            <td class="ac">Sensors, Actuators, Cameras, RFID, Arduino/MCU</td>
-          </tr>
-          <tr>
-            <td>Layer 2</td>
-            <td class="ac">Network Layer<br><small style="color:var(--text3);font-size:.68rem;">طبقة الشبكة</small></td>
-            <td class="ac">Transmit data between Perception &amp; Application layers — connectivity bridge</td>
-            <td class="ac">Wi-Fi, Zigbee, Bluetooth, LoRaWAN, Gateways, Routers, 4G/5G</td>
-          </tr>
-          <tr>
-            <td>Layer 3</td>
-            <td class="ac">Application Layer<br><small style="color:var(--text3);font-size:.68rem;">طبقة التطبيقات</small></td>
-            <td class="ac">Process data and deliver services to end users via applications</td>
-            <td class="ac">Dashboards, Mobile apps, Cloud platforms, APIs</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-fill">Q2</span><span class="q-head-title">Fill the Blanks</span></div>
-    <div class="q-body">
-      <div class="fill-list">
-        <div class="fill-item"><span class="fill-num">1</span><div>
-          <div class="fill-q">The Network Layer is the <em>___</em> that transforms a local "Embedded System" into an "Internet of Things" system by <em>___</em></div>
-          <div class="fill-ans">bridge &nbsp;<span style="font-family:'Cairo',sans-serif;color:var(--text2);font-size:.85rem;">(الجسر)</span></div>
-          <div class="fill-note">…by connecting the device to the internet and enabling remote communication with other devices and cloud servers</div>
-        </div></div>
+<!-- ======================== SECTION: AXIOMS ======================== -->
+<div id="axioms" class="section">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">⚖️</div>
+      <div>
+        <div class="card-title">مسلّمات كولموغوروف</div>
+        <div class="card-subtitle">الأسس الثلاثة لنظرية الاحتمال</div>
       </div>
+    </div>
+    <div class="card-body">
+
+      <div class="axiom-item">
+        <div class="axiom-num">1</div>
+        <div class="axiom-content">
+          <div class="law-box">
+            <div class="law-label">عدم السالبية</div>
+            <div class="formula">\( \forall A \in \mathcal{F},\quad P\{A\} \geq 0 \)</div>
+          </div>
+          <div class="when-box">
+            <strong>📌 المعنى</strong>
+            احتمال أي حدث لا يمكن أن يكون سالباً. الحد الأدنى للاحتمال هو صفر (مستحيل).
+          </div>
+        </div>
+      </div>
+
+      <div class="axiom-item">
+        <div class="axiom-num">2</div>
+        <div class="axiom-content">
+          <div class="law-box">
+            <div class="law-label">التطبيع</div>
+            <div class="formula">\( P\{S\} = 1 \)</div>
+          </div>
+          <div class="when-box">
+            <strong>📌 المعنى</strong>
+            احتمال الفضاء الكامل (أن يحدث شيء ما) يساوي 1. مجموع جميع الاحتمالات الممكنة = 1.
+          </div>
+        </div>
+      </div>
+
+      <div class="axiom-item">
+        <div class="axiom-num">3</div>
+        <div class="axiom-content">
+          <div class="law-box">
+            <div class="law-label">الجمعية للأحداث المتنافية</div>
+            <div class="formula">
+              إذا \(A_i \cap A_j = \emptyset\) لكل \(i \neq j\)، إذاً:<br>
+              \( P\!\left\{\bigcup_{i=1}^{k} A_i\right\} = \sum_{i=1}^{k} P\{A_i\} \)
+            </div>
+          </div>
+          <div class="when-box">
+            <strong>📌 متى تستخدمه</strong>
+            عندما تكون لديك أحداث لا تشترك في أي نتيجة (متنافية / Mutually Exclusive). مثال: رمي النرد، الحصول على 1 أو 2 أو 3 كلها أحداث متنافية.
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <p style="font-size:.88rem;font-weight:600;color:var(--gold-light);margin-bottom:14px;">النتائج المشتقة (Corollaries)</p>
+
+      <div class="law-box">
+        <div class="law-label">احتمال التكامل</div>
+        <div class="formula">
+          \( P\{A\} + P\{\bar{A}\} = 1 \quad \Rightarrow \quad P\{A\} = 1 - P\{\bar{A}\} \)
+        </div>
+      </div>
+
+      <div class="law-box">
+        <div class="law-label">الحدث المستحيل</div>
+        <div class="formula">\( P\{\emptyset\} = 0 \)</div>
+      </div>
+
+      <div class="law-box">
+        <div class="law-label">احتمال الاتحاد (عام)</div>
+        <div class="formula">\( P\{A \cup B\} = P\{A\} + P\{B\} - P\{A \cap B\} \)</div>
+      </div>
+
+      <div class="law-box">
+        <div class="law-label">ثلاثة أحداث</div>
+        <div class="formula" style="font-size:.88rem;">
+          \( P\{A \cup B \cup C\} = P\{A\}+P\{B\}+P\{C\} \)<br>
+          \( -P\{A\cap B\}-P\{A\cap C\}-P\{B\cap C\} \)<br>
+          \( +P\{A\cap B\cap C\} \)
+        </div>
+      </div>
+
+      <div class="when-box">
+        <strong>📌 مبدأ لابلاس (Laplace)</strong>
+        إذا كانت جميع النتائج متكافئة الاحتمال وعدد النتائج = K، فإن احتمال كل نتيجة = 1/K. استخدم طرق العد التوافقي (التباديل والتوافيق) لحساب الاحتمالات.
+      </div>
+
     </div>
   </div>
 </div>
 
-
-<!-- ══════════════════════════════════════════════════════════
-     Q3 — Daily Quiz A   2026/04/15
-══════════════════════════════════════════════════════════ -->
-<div id="q3" class="section">
-  <div class="quiz-header">
-    <div class="qh-left">
-      <div class="quiz-num">Daily Quiz — A (15/04)</div>
-      <div class="quiz-title">MCU vs MPU · UART/SPI/I2C · D2D/D2C/D2G · Smart Agriculture Scenario</div>
-    </div>
-    <div class="quiz-date">2026 / 04 / 15</div>
-  </div>
-
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-fill">Q1</span><span class="q-head-title">Communication Interfaces — Complete the Table</span></div>
-    <div class="q-body">
-      <table class="dtable">
-        <thead><tr><th>Interface</th><th>Synchronous / Asynchronous</th><th>Number of Wires</th></tr></thead>
-        <tbody>
-          <tr><td style="color:var(--teal);font-weight:700;">UART</td><td class="ac">Asynchronous &nbsp;<small style="color:var(--text3);">(غير متزامن)</small></td><td>2 wires — TX, RX</td></tr>
-          <tr><td style="color:var(--blue);font-weight:700;">SPI</td><td>Synchronous</td><td class="ac">4 wires — MOSI, MISO, SCK, SS</td></tr>
-          <tr><td style="color:var(--purple);font-weight:700;">I2C</td><td class="ac">Synchronous &nbsp;<small style="color:var(--text3);">(متزامن)</small></td><td>2 wires — SDA, SCL</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-tf">Q2</span><span class="q-head-title">True or False — Correct the False Ones</span></div>
-    <div class="q-body">
-      <div class="summary-strip">
-        <span class="chip chip-f">1-F</span><span class="chip chip-t">2-T</span>
-        <span class="chip chip-f">3-F</span><span class="chip chip-f">4-F</span>
-      </div>
-      <div class="tf-list">
-        <div class="tf-item">
-          <span class="tf-num">1</span>
-          <span class="tf-q">Microprocessors (MPUs) contain built-in Flash memory and RAM on the same chip, making them ideal for small, low-power IoT sensors.</span>
-          <span class="tf-ans ans-F">FALSE</span>
-          <div class="tf-fix">✎ That describes <strong>Microcontrollers (MCUs)</strong>. MPUs are high-performance processors requiring external memory (RAM/ROM) — used for complex tasks like video or OS-based processing.</div>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">2</span>
-          <span class="tf-q">The D2G model is necessary when IoT devices use local protocols like Zigbee that cannot connect directly to the global Internet.</span>
-          <span class="tf-ans ans-T">TRUE</span>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">3</span>
-          <span class="tf-q">In the D2D communication model, IoT devices must connect to the global Internet to exchange data with each other.</span>
-          <span class="tf-ans ans-F">FALSE</span>
-          <div class="tf-fix">✎ In D2D, devices communicate <strong>locally and directly</strong> (e.g., via Bluetooth or Zigbee) <strong>without needing the Internet</strong>.</div>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">4</span>
-          <span class="tf-q">GPIO pins on a microcontroller can only be configured as input pins to read data from sensors.</span>
-          <span class="tf-ans ans-F">FALSE</span>
-          <div class="tf-fix">✎ GPIO pins can be configured as <strong>Input</strong> (read sensors) OR <strong>Output</strong> (control actuators like LEDs, motors, relays).</div>
-        </div>
+<!-- ======================== SECTION: CONDITIONAL ======================== -->
+<div id="conditional" class="section">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🔍</div>
+      <div>
+        <div class="card-title">الاحتمال الشرطي</div>
+        <div class="card-subtitle">تحديث الاحتمال في ضوء معلومة جديدة</div>
       </div>
     </div>
-  </div>
+    <div class="card-body">
 
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-mcq">Q3</span><span class="q-head-title">Choose the Correct Answer</span></div>
-    <div class="q-body">
-      <div class="mcq-list">
-        <div class="mcq-item">
-          <div class="mcq-n">Q3.1</div>
-          <div class="mcq-q">Best connectivity for an underground smart water meter sending a few bytes once a day?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) Wi-Fi</div><div class="mcq-opt">b) Bluetooth</div>
-            <div class="mcq-opt ok">c) LoRaWAN</div><div class="mcq-opt">d) Cellular (5G)</div>
+      <p style="font-size:.9rem;line-height:1.8;margin-bottom:16px;">
+        الاحتمال الشرطي يعطينا <span class="highlight">احتمالاً محدّثاً</span> لحدث A بعد معرفة أن الحدث B قد وقع. يُسمى <span class="highlight-blue">الاحتمال البعدي (Posterior Probability)</span>.
+      </p>
+
+      <div class="law-box">
+        <div class="law-label">التعريف الرسمي</div>
+        <div class="formula">
+          \( P\{A \mid B\} = \dfrac{P\{A \cap B\}}{P\{B\}} \)
+        </div>
+      </div>
+
+      <div class="law-box">
+        <div class="law-label">قاعدة الضرب (مشتقة)</div>
+        <div class="formula">
+          \( P\{A \cap B\} = P\{A \mid B\} \cdot P\{B\} \)
+        </div>
+      </div>
+
+      <div class="when-box">
+        <strong>📌 متى تستخدمه</strong>
+        عندما تعرف أن حدثاً معيناً قد وقع وتريد إعادة حساب احتمال حدث آخر. مثال: عرفت أن رقم النرد فردي، فما احتمال أن يكون 3؟
+      </div>
+
+      <div class="divider"></div>
+
+      <p style="font-size:.88rem;font-weight:600;color:var(--gold-light);margin-bottom:14px;">مثال: رمي نرد عادل</p>
+
+      <div class="step">
+        <div class="step-num">S</div>
+        <div class="step-content">
+          فضاء العينة: \(\{1,2,3,4,5,6\}\)، كل نتيجة احتمالها = \(1/6\)
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">Q1</div>
+        <div class="step-content">
+          احتمال الحصول على 3؟<br>
+          <div class="math-line">\( P\{3\} = \dfrac{1}{6} \)</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">Q2</div>
+        <div class="step-content">
+          احتمال الحصول على 3 بمعرفة أن الرقم فردي؟<br>
+          ليكن A = {3} وB = {1,3,5}<br>
+          <div class="math-line">
+            \( P\{A \mid B\} = \dfrac{P\{A \cap B\}}{P\{B\}} = \dfrac{1/6}{3/6} = \dfrac{1}{3} \)
           </div>
-          <div class="mcq-note">LoRaWAN = Long Range + Very Low Power — perfect for rare, small-data transmissions over large distances underground</div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">Q3.2</div>
-          <div class="mcq-q">Connect a sensor to MCU using only 2 wires with a clock signal — best interface?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) SPI</div><div class="mcq-opt">b) UART</div>
-            <div class="mcq-opt ok">c) I2C</div><div class="mcq-opt">d) GPIO</div>
-          </div>
-          <div class="mcq-note">I2C uses 2 wires (SDA+SCL) and is synchronous (has clock). SPI needs 4 wires. UART uses 2 wires but is asynchronous (no clock).</div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">Q3.3</div>
-          <div class="mcq-q">Publishing sensor data to multiple subscribers simultaneously with low bandwidth overhead?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) HTTP</div><div class="mcq-opt ok">b) MQTT</div>
-            <div class="mcq-opt">c) CoAP</div><div class="mcq-opt">d) TCP/IP</div>
-          </div>
-          <div class="mcq-note">MQTT Publish/Subscribe: one publisher sends to a broker which distributes to ALL subscribers. Very lightweight protocol.</div>
+          <div class="answer-box"><strong>الجواب:</strong> الاحتمال تضاعف من 1/6 إلى 1/3 لأن المعلومة الجديدة ضيّقت الفضاء</div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-des">Q4</span><span class="q-head-title">Design Scenario — Smart Agriculture Farm (5 km radius)</span></div>
-    <div class="q-body">
-      <div class="scenario">
-        <div class="scenario-lbl">📋 Scenario</div>
-        <div class="scenario-en">Design an IoT system to monitor soil moisture over a large farm (5 km radius). Sensors run on small batteries that must last for years.</div>
-        <div class="scenario-ar">تصميم نظام إنترنت الأشياء لمزرعة ذكية لمراقبة رطوبة التربة على مساحة نصف قطرها 5 كيلومترات — المستشعرات تعمل على بطاريات صغيرة تدوم لسنوات.</div>
-      </div>
-      <div class="design-grid">
-        <div class="d-card">
-          <div class="d-num">Question 1 — Processing Unit</div>
-          <div class="d-q">MCU or MPU? Justify.</div>
-          <div class="d-ans">✓ MCU (Microcontroller)</div>
-          <div class="d-why">Very low power consumption + built-in memory + simple task (reading soil moisture) = no need for MPU's high computational power.</div>
-        </div>
-        <div class="d-card">
-          <div class="d-num">Question 2 — Connectivity</div>
-          <div class="d-q">Most suitable wireless technology?</div>
-          <div class="d-ans">✓ LoRaWAN</div>
-          <div class="d-why">Long-range (up to km) + extremely low power = ideal for battery-powered sensors across a large farm area.</div>
-        </div>
-        <div class="d-card">
-          <div class="d-num">Question 3 — Protocol</div>
-          <div class="d-q">HTTP or MQTT?</div>
-          <div class="d-ans">✓ MQTT</div>
-          <div class="d-why">Lightweight + minimal overhead + Publish/Subscribe model + saves battery. HTTP's request-response cycle is too heavy for constrained devices.</div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
 
-
-<!-- ══════════════════════════════════════════════════════════
-     Q4 — Daily Quiz B   2026/04/15
-══════════════════════════════════════════════════════════ -->
-<div id="q4" class="section">
-  <div class="quiz-header">
-    <div class="qh-left">
-      <div class="quiz-num">Daily Quiz — B (15/04)</div>
-      <div class="quiz-title">Protocols Table · T/F · MCQ · Smart Security Camera Scenario</div>
+<!-- ======================== SECTION: INDEPENDENCE ======================== -->
+<div id="independence" class="section">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🔗</div>
+      <div>
+        <div class="card-title">الاستقلالية</div>
+        <div class="card-subtitle">عندما لا يؤثر حدث على آخر</div>
+      </div>
     </div>
-    <div class="quiz-date">2026 / 04 / 15</div>
-  </div>
+    <div class="card-body">
 
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-fill">Q1</span><span class="q-head-title">IoT Messaging Protocols — Complete the Table</span></div>
-    <div class="q-body">
-      <table class="dtable">
-        <thead><tr><th>Protocol</th><th>Architecture Model</th><th>Transport Layer</th></tr></thead>
-        <tbody>
-          <tr><td style="color:var(--red);font-weight:700;">HTTP</td><td class="ac">Request / Response (Client-Server)</td><td>TCP</td></tr>
-          <tr><td style="color:var(--teal);font-weight:700;">MQTT</td><td class="ac">Publish / Subscribe</td><td>TCP</td></tr>
-          <tr><td style="color:var(--amber);font-weight:700;">CoAP</td><td>GET and POST (RESTful)</td><td class="ac">UDP</td></tr>
-        </tbody>
+      <div class="law-box">
+        <div class="law-label">تعريف الاستقلالية</div>
+        <div class="formula">
+          \( A \perp B \iff P\{A \mid B\} = P\{A\} \)
+        </div>
+      </div>
+
+      <div class="law-box">
+        <div class="law-label">صيغة الضرب (شرط مكافئ)</div>
+        <div class="formula">
+          \( A \perp B \iff P\{A \cap B\} = P\{A\} \cdot P\{B\} \)
+        </div>
+      </div>
+
+      <div class="when-box">
+        <strong>📌 متى تستخدمه</strong>
+        عندما تريد التحقق من أن معرفة حدوث B لا تغير احتمال A. تستخدمه كثيراً في رمي العملات والنرد المتعاقب، حيث كل رمية مستقلة عن السابقة.
+      </div>
+
+      <div style="background:rgba(224,90,90,0.08);border:1px solid rgba(224,90,90,0.25);border-radius:8px;padding:14px 18px;margin:14px 0;">
+        <p style="color:var(--red);font-size:.8rem;letter-spacing:1px;font-weight:700;margin-bottom:6px;">⚠️ تحذير مهم</p>
+        <p style="font-size:.88rem;line-height:1.7;">
+          لأكثر من حدثين: <strong>صيغة الضرب الثنائية لا تكفي!</strong> يجب التحقق من جميع المجموعات الممكنة.<br>
+          مثلاً لثلاثة أحداث A,B,C يجب أن تتحقق أيضاً:
+          \( P\{A \cap B \cap C\} = P\{A\} \cdot P\{B\} \cdot P\{C\} \)
+        </p>
+      </div>
+
+      <div class="divider"></div>
+      <p style="font-size:.88rem;font-weight:600;color:var(--gold-light);margin-bottom:14px;">مثال مقارنة: مستقل أم لا؟</p>
+
+      <table class="prob-table">
+        <tr>
+          <th></th>
+          <th>أحمر كبير</th>
+          <th>أحمر صغير</th>
+          <th>أزرق كبير</th>
+          <th>أزرق صغير</th>
+        </tr>
+        <tr>
+          <td><strong>ملزمة 1 (غير مستقل)</strong></td>
+          <td>2</td><td>1</td><td>3</td><td>1</td>
+        </tr>
+        <tr>
+          <td><strong>ملزمة 2 (مستقل)</strong></td>
+          <td>2</td><td>2</td><td>3</td><td>3</td>
+        </tr>
       </table>
-    </div>
-  </div>
 
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-tf">Q2</span><span class="q-head-title">True or False — Correct the False Ones</span></div>
-    <div class="q-body">
-      <div class="summary-strip">
-        <span class="chip chip-t">1-T</span><span class="chip chip-f">2-F</span>
-        <span class="chip chip-t">3-T</span><span class="chip chip-f">4-F</span>
-      </div>
-      <div class="tf-list">
-        <div class="tf-item">
-          <span class="tf-num">1</span>
-          <span class="tf-q">I2C communication requires fewer wires than SPI but is generally slower.</span>
-          <span class="tf-ans ans-T">TRUE</span>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">2</span>
-          <span class="tf-q">In UART communication, the sender and receiver must share a Clock signal to transfer data successfully.</span>
-          <span class="tf-ans ans-F">FALSE</span>
-          <div class="tf-fix">✎ UART is <strong>Asynchronous</strong> — it does NOT use a clock signal. Both devices agree on the same baud rate (speed) instead of sharing a physical clock line.</div>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">3</span>
-          <span class="tf-q">HTTP is a heavy protocol with high overhead, making it less suitable for battery-powered IoT devices compared to MQTT.</span>
-          <span class="tf-ans ans-T">TRUE</span>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">4</span>
-          <span class="tf-q">SPI supports Multi-Master and Multi-Slave using only two wires for communication.</span>
-          <span class="tf-ans ans-F">FALSE</span>
-          <div class="tf-fix">✎ <strong>I2C</strong> uses 2 wires (SDA+SCL) and supports Multi-Master. <strong>SPI</strong> uses 4 wires and typically has a Single-Master with multiple slaves selected via separate SS pins.</div>
-        </div>
-      </div>
-    </div>
-  </div>
+      <p style="font-size:.85rem;line-height:1.8;margin-top:12px;">
+        في الملزمة 2: P{أحمر} = 4/10، P{صغير} = 5/10، P{أحمر∩صغير} = 2/10<br>
+        <span style="direction:ltr;display:inline-block;">P{أحمر} × P{صغير} = (4/10)(5/10) = 2/10 ✓ → مستقلان</span>
+      </p>
 
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-mcq">Q3</span><span class="q-head-title">Choose the Correct Answer</span></div>
-    <div class="q-body">
-      <div class="mcq-list">
-        <div class="mcq-item">
-          <div class="mcq-n">Q3.1</div>
-          <div class="mcq-q">Main architectural difference distinguishing MPU from MCU?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) MPU has built-in Flash and RAM</div>
-            <div class="mcq-opt ok">b) MPU requires external memory to operate</div>
-            <div class="mcq-opt">c) MPU is for low-power sensors only</div>
-            <div class="mcq-opt">d) MPU cannot connect to internet</div>
-          </div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">Q3.2</div>
-          <div class="mcq-q">IoT device connects directly to an application service provider via IP networks — which model?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) D2D</div>
-            <div class="mcq-opt ok">b) Device-to-Cloud (D2C)</div>
-            <div class="mcq-opt">c) D2G</div>
-            <div class="mcq-opt">d) Back-End Data Sharing</div>
-          </div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">Q3.3</div>
-          <div class="mcq-q">SPI differs from UART primarily because SPI:</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) Is strictly asynchronous</div>
-            <div class="mcq-opt ok">b) Uses a shared clock line (Synchronous)</div>
-            <div class="mcq-opt">c) Supports only half-duplex</div>
-            <div class="mcq-opt">d) Uses only two wires</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-des">Q4</span><span class="q-head-title">Design Scenario — Smart Security Camera (Bank)</span></div>
-    <div class="q-body">
-      <div class="scenario">
-        <div class="scenario-lbl">📋 Scenario</div>
-        <div class="scenario-en">Design a Smart Security Camera for a bank: capture HD video, process faces in real-time, send video stream directly to a central server.</div>
-        <div class="scenario-ar">تصميم نظام كاميرات مراقبة ذكية لبنك: التقاط فيديو عالي الدقة + معالجة الوجوه في الوقت الفعلي + إرسال البث مباشرةً لخادم مركزي.</div>
-      </div>
-      <div class="design-grid">
-        <div class="d-card">
-          <div class="d-num">Question 1 — Processing Unit</div>
-          <div class="d-q">MCU or MPU? Justify.</div>
-          <div class="d-ans">✓ MPU (Microprocessor)</div>
-          <div class="d-why">HD video + real-time face recognition = high computational power + large external RAM. Only an MPU (e.g., Raspberry Pi CPU) can handle this. MCUs are too weak.</div>
-        </div>
-        <div class="d-card">
-          <div class="d-num">Question 2 — Connectivity</div>
-          <div class="d-q">Best technology for high data transfer?</div>
-          <div class="d-ans">✓ Wi-Fi or Ethernet</div>
-          <div class="d-why">HD video requires high bandwidth. Wi-Fi/Ethernet support Mbps–Gbps speeds. LoRaWAN and Bluetooth are far too slow for continuous video streaming.</div>
-        </div>
-        <div class="d-card">
-          <div class="d-num">Question 3 — Communication Model</div>
-          <div class="d-q">D2D or D2C?</div>
-          <div class="d-ans">✓ Device-to-Cloud (D2C)</div>
-          <div class="d-why">Camera sends directly to central server (cloud) via internet — no intermediate gateway. It's a direct Device-to-Cloud connection.</div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
 
-
-<!-- ══════════════════════════════════════════════════════════
-     Q5 — Daily Quiz C   2026/04/15
-══════════════════════════════════════════════════════════ -->
-<div id="q5" class="section">
-  <div class="quiz-header">
-    <div class="qh-left">
-      <div class="quiz-num">Daily Quiz — C (15/04)</div>
-      <div class="quiz-title">Wireless Range/Power · Protocols T/F · MCQ · Smartwatch Scenario</div>
-    </div>
-    <div class="quiz-date">2026 / 04 / 15</div>
-  </div>
-
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-fill">Q1</span><span class="q-head-title">Wireless Technologies — Range &amp; Power Consumption</span></div>
-    <div class="q-body">
-      <table class="dtable">
-        <thead><tr><th>Technology</th><th>Range (Distance)</th><th>Power Consumption</th></tr></thead>
-        <tbody>
-          <tr><td style="color:var(--teal);font-weight:700;">Wi-Fi</td><td>Short / Medium (~50–100m)</td><td class="ac">High &nbsp;<small style="color:var(--text3);">(استهلاك عالٍ)</small></td></tr>
-          <tr><td style="color:var(--blue);font-weight:700;">Bluetooth (BLE)</td><td class="ac">Short (~10–50m) &nbsp;<small style="color:var(--text3);">(مدى قصير)</small></td><td>Very Low</td></tr>
-          <tr><td style="color:var(--amber);font-weight:700;">LoRaWAN</td><td>Long (up to km)</td><td class="ac">Low &nbsp;<small style="color:var(--text3);">(استهلاك منخفض)</small></td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-tf">Q2</span><span class="q-head-title">True or False — Correct the False Ones</span></div>
-    <div class="q-body">
-      <div class="summary-strip">
-        <span class="chip chip-f">1-F</span><span class="chip chip-t">2-T</span>
-        <span class="chip chip-t">3-T</span><span class="chip chip-f">4-F</span>
-      </div>
-      <div class="tf-list">
-        <div class="tf-item">
-          <span class="tf-num">1</span>
-          <span class="tf-q">In MQTT, IoT devices communicate directly with each other without any central server.</span>
-          <span class="tf-ans ans-F">FALSE</span>
-          <div class="tf-fix">✎ MQTT requires a central <strong>"Broker"</strong> server. Publishers send TO the broker; the broker routes messages to all matching subscribers. No direct device-to-device communication.</div>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">2</span>
-          <span class="tf-q">CoAP is designed for constrained IoT devices and operates over UDP to reduce overhead.</span>
-          <span class="tf-ans ans-T">TRUE</span>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">3</span>
-          <span class="tf-q">Cellular networks (4G/5G) provide long-range communication but consume significantly more power than LoRaWAN.</span>
-          <span class="tf-ans ans-T">TRUE</span>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">4</span>
-          <span class="tf-q">In an MCU, Flash memory is used for temporary data storage, while RAM permanently stores the program code.</span>
-          <span class="tf-ans ans-F">FALSE</span>
-          <div class="tf-fix">✎ Exact opposite: <strong>Flash memory</strong> permanently stores the program code. <strong>RAM</strong> is used for temporary data storage during execution (lost when powered off).</div>
-        </div>
+<!-- ======================== SECTION: TOTAL PROBABILITY ======================== -->
+<div id="total" class="section">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🧩</div>
+      <div>
+        <div class="card-title">قانون الاحتمال الكلي</div>
+        <div class="card-subtitle">تقسيم المسألة إلى حالات أبسط</div>
       </div>
     </div>
-  </div>
+    <div class="card-body">
 
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-mcq">Q3</span><span class="q-head-title">Choose the Correct Answer</span></div>
-    <div class="q-body">
-      <div class="mcq-list">
-        <div class="mcq-item">
-          <div class="mcq-n">Q3.1</div>
-          <div class="mcq-q">Which MCU internal component generates precise delays and measures time intervals?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) Flash Memory</div>
-            <div class="mcq-opt ok">b) Timers and Counters</div>
-            <div class="mcq-opt">c) ADC</div>
-            <div class="mcq-opt">d) SPI</div>
-          </div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">Q3.2</div>
-          <div class="mcq-q">Lightweight alternative to HTTP for constrained IoT devices, operating over UDP?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) MQTT</div><div class="mcq-opt">b) TCP/IP</div>
-            <div class="mcq-opt">c) UART</div><div class="mcq-opt ok">d) CoAP</div>
-          </div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">Q3.3</div>
-          <div class="mcq-q">Smart home temperature sensor → home Wi-Fi router → AWS server. Which model?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) D2D</div>
-            <div class="mcq-opt ok">b) Device-to-Cloud (D2C)</div>
-            <div class="mcq-opt">c) D2G</div>
-            <div class="mcq-opt">d) Back-End Data Sharing</div>
-          </div>
-        </div>
+      <p style="font-size:.9rem;line-height:1.8;margin-bottom:14px;">
+        إذا كانت \(B_1, B_2, \ldots, B_k\) <span class="highlight">تقسيماً (Partition)</span> لفضاء العينة S، أي أنها:
+      </p>
+      <div class="chips">
+        <span class="chip">متبادلة الإقصاء: \(B_i \cap B_j = \emptyset\)</span>
+        <span class="chip">شاملة: \(\bigcup B_i = S\)</span>
       </div>
-    </div>
-  </div>
 
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-des">Q4</span><span class="q-head-title">Design Scenario — Wearable Smartwatch (Hospital Patient Monitoring)</span></div>
-    <div class="q-body">
-      <div class="scenario">
-        <div class="scenario-lbl">📋 Scenario</div>
-        <div class="scenario-en">A wearable smartwatch sends a patient's heart rate to a smartphone via Bluetooth. The smartphone then connects to the Internet to forward data to the hospital server.</div>
-        <div class="scenario-ar">ساعة ذكية ترسل معدل ضربات القلب إلى هاتف ذكي عبر البلوتوث، ثم يُرسل الهاتف البيانات إلى خادم المستشفى عبر الإنترنت.</div>
-      </div>
-      <div class="design-grid">
-        <div class="d-card">
-          <div class="d-num">Question 1 — Communication Model</div>
-          <div class="d-q">What model is used? What role does the phone play?</div>
-          <div class="d-ans">✓ Device-to-Gateway (D2G)</div>
-          <div class="d-why">The watch cannot reach the internet directly (uses Bluetooth). The <strong>smartphone acts as a Gateway</strong> — bridging Bluetooth to the global internet.</div>
-        </div>
-        <div class="d-card">
-          <div class="d-num">Question 2 — Connectivity Watch↔Phone</div>
-          <div class="d-q">Best technology for the watch-to-phone link?</div>
-          <div class="d-ans">✓ Bluetooth / BLE</div>
-          <div class="d-why">Short-range personal device communication. BLE (Bluetooth Low Energy) is perfect for wearables — low power, preserving battery life.</div>
-        </div>
-        <div class="d-card">
-          <div class="d-num">Question 3 — Internal Sensor Interface</div>
-          <div class="d-q">Connect heart sensor to processing unit with 2 wires — SPI or I2C?</div>
-          <div class="d-ans">✓ I2C</div>
-          <div class="d-why">I2C uses exactly 2 wires (SDA + SCL), supports multiple sensors on one bus. Standard choice for compact wearable sensor integration.</div>
+      <div class="law-box">
+        <div class="law-label">قانون الاحتمال الكلي</div>
+        <div class="formula">
+          \( P\{A\} = \sum_{i=1}^{k} P\{A \mid B_i\} \cdot P\{B_i\} \)
         </div>
       </div>
+
+      <div class="when-box">
+        <strong>📌 متى تستخدمه</strong>
+        عندما يكون حدوث A يعتمد على أيٍّ من عدة سيناريوهات (شروط) B₁, B₂, …, Bₖ. مثال كلاسيكي: اختيار جرّة عشوائياً ثم سحب كرة منها.
+      </div>
+
     </div>
   </div>
 </div>
 
-
-<!-- ══════════════════════════════════════════════════════════
-     Q6 — DQ3   2026/04/29
-══════════════════════════════════════════════════════════ -->
-<div id="q6" class="section">
-  <div class="quiz-header">
-    <div class="qh-left">
-      <div class="quiz-num">DQ3 — Choose Ten Only</div>
-      <div class="quiz-title">Arduino · HC-SR04 · LDR · IoT Architecture MCQs + Section C</div>
-    </div>
-    <div class="quiz-date">2026 / 04 / 29</div>
-  </div>
-
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-mcq">Q1</span><span class="q-head-title">Multiple Choice — Choose Ten Only</span></div>
-    <div class="q-body">
-      <div class="mcq-list">
-        <div class="mcq-item">
-          <div class="mcq-n">1</div>
-          <div class="mcq-q">The ultrasonic sensor HC-SR04 measures:</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) Temperature</div><div class="mcq-opt">b) Humidity</div>
-            <div class="mcq-opt ok">c) Distance</div><div class="mcq-opt">d) Light intensity</div>
-          </div>
-          <div class="mcq-note">HC-SR04 emits ultrasonic pulses; measures echo return time → Distance = (Time × 343 m/s) / 2</div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">2</div>
-          <div class="mcq-q">The Arduino Uno operates at which voltage?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) 9.3V</div><div class="mcq-opt">b) 1.8V</div>
-            <div class="mcq-opt ok">c) 5V</div><div class="mcq-opt">d) 12V</div>
-          </div>
-          <div class="mcq-note">Arduino Uno = 5V logic. Powered via USB (5V) or barrel jack (7–12V regulated to 5V internally)</div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">3</div>
-          <div class="mcq-q">Which display type uses I2C communication?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) LCD (direct parallel)</div><div class="mcq-opt">b) Seven-segment</div>
-            <div class="mcq-opt ok">c) OLED</div><div class="mcq-opt">d) TFT</div>
-          </div>
-          <div class="mcq-note">OLED displays (SSD1306 chip) commonly use I2C protocol (address 0x3C). TFT uses SPI. Basic LCD uses parallel or SPI.</div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">4</div>
-          <div class="mcq-q">An LDR sensor produces which type of signal?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) Digital</div><div class="mcq-opt ok">b) Analog</div>
-            <div class="mcq-opt">c) PWM</div><div class="mcq-opt">d) Binary</div>
-          </div>
-          <div class="mcq-note">LDR = Light Dependent Resistor — passive analog component. Resistance varies with light → produces analog voltage read via ADC pin.</div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">5</div>
-          <div class="mcq-q">In which IoT architecture layer do sensors belong?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) Application Layer</div><div class="mcq-opt">b) Network Layer</div>
-            <div class="mcq-opt ok">c) Perception Layer</div><div class="mcq-opt">d) Business Layer</div>
-          </div>
-          <div class="mcq-note">Perception Layer = physical foundation — all sensors, actuators, and physical devices reside here.</div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">6</div>
-          <div class="mcq-q">Correct distance formula for ultrasonic sensor?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) Distance = Time + Speed of Sound</div>
-            <div class="mcq-opt">b) Distance = Time × Speed of Sound</div>
-            <div class="mcq-opt ok">c) Distance = (Time × Speed of Sound) / 2</div>
-            <div class="mcq-opt">d) Distance = Speed of Sound / Time</div>
-          </div>
-          <div class="mcq-note">Sound travels TO the object AND BACK → divide by 2 for one-way distance. Speed of sound ≈ 343 m/s in air.</div>
-        </div>
+<!-- ======================== SECTION: BAYES ======================== -->
+<div id="bayes" class="section">
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🔄</div>
+      <div>
+        <div class="card-title">قاعدة بايز</div>
+        <div class="card-subtitle">الاستدلال العكسي — من النتيجة إلى السبب</div>
       </div>
     </div>
-  </div>
+    <div class="card-body">
 
-  <div class="divider"></div>
-  <div class="sdiv"><div class="sdiv-line"></div><span class="sdiv-txt">Section C — T/F + MCQ</span><div class="sdiv-line"></div></div>
-
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-tf">Section C – Q1</span><span class="q-head-title">True or False</span></div>
-    <div class="q-body">
-      <div class="summary-strip">
-        <span class="chip chip-f">1-F</span><span class="chip chip-t">2-T</span><span class="chip chip-t">3-T</span>
-        <span class="chip chip-t">4-T</span><span class="chip chip-t">5-T</span>
-      </div>
-      <div class="tf-list">
-        <div class="tf-item">
-          <span class="tf-num">1</span>
-          <span class="tf-q">Security and Privacy are less important in IoT than in isolated systems.</span>
-          <span class="tf-ans ans-F">FALSE</span>
-          <div class="tf-fix">✎ Security is <strong>MORE critical</strong> in IoT — billions of connected devices dramatically expand the attack surface compared to isolated systems.</div>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">2</span>
-          <span class="tf-q">Arduino is a microcontroller often used in the Perception Layer.</span>
-          <span class="tf-ans ans-T">TRUE</span>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">3</span>
-          <span class="tf-q">IoT Architecture serves as a "blueprint" for data flow.</span>
-          <span class="tf-ans ans-T">TRUE</span>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">4</span>
-          <span class="tf-q">The Processing Layer acts as the "brain" for data filtering and storage.</span>
-          <span class="tf-ans ans-T">TRUE</span>
-        </div>
-        <div class="tf-item">
-          <span class="tf-num">5</span>
-          <span class="tf-q">The ultimate goal of IoT is automation and autonomous decision-making.</span>
-          <span class="tf-ans ans-T">TRUE</span>
+      <div class="law-box">
+        <div class="law-label">الصيغة الأساسية</div>
+        <div class="formula">
+          \( P\{A \mid B\} \cdot P\{B\} = P\{A \cap B\} = P\{B \mid A\} \cdot P\{A\} \)
         </div>
       </div>
-    </div>
-  </div>
 
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-mcq">Section C – Q2</span><span class="q-head-title">Choose the Right Answer</span></div>
-    <div class="q-body">
-      <div class="mcq-list">
-        <div class="mcq-item">
-          <div class="mcq-n">1</div>
-          <div class="mcq-q">Which is a core objective of IoT architecture?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) System Complexity</div>
-            <div class="mcq-opt">b) Reducing device count</div>
-            <div class="mcq-opt ok">c) Scalability and Maintainability</div>
-          </div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">2</div>
-          <div class="mcq-q">A device that opens a window when it detects smoke is an:</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) Sensor</div>
-            <div class="mcq-opt ok">b) Actuator</div>
-            <div class="mcq-opt">c) Gateway</div>
-          </div>
-          <div class="mcq-note">Smoke sensor detects → signal → Actuator (motor/servo) opens the window. Detection = sensor; physical action = actuator.</div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">3</div>
-          <div class="mcq-q">Which layer is the "Brain" of the IoT system?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) Perception</div>
-            <div class="mcq-opt ok">b) Processing</div>
-            <div class="mcq-opt">c) Network</div>
-          </div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">4</div>
-          <div class="mcq-q">An Embedded System that is NOT typically IoT:</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt ok">a) A traditional microwave</div>
-            <div class="mcq-opt">b) A smartwatch</div>
-            <div class="mcq-opt">c) A smart thermostat</div>
-          </div>
-          <div class="mcq-note">Traditional microwave = no internet, standalone embedded system. Smartwatch &amp; thermostat connect to internet → IoT devices.</div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">5</div>
-          <div class="mcq-q">Most commonly used protocol for home IoT internet connectivity?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt">a) Zigbee</div>
-            <div class="mcq-opt ok">b) Wi-Fi</div>
-            <div class="mcq-opt">c) LoRaWAN</div>
-          </div>
-        </div>
-        <div class="mcq-item">
-          <div class="mcq-n">6</div>
-          <div class="mcq-q">Which layer interacts directly with the physical environment?</div>
-          <div class="mcq-opts">
-            <div class="mcq-opt ok">a) Perception</div>
-            <div class="mcq-opt">b) Application</div>
-            <div class="mcq-opt">c) Business</div>
-          </div>
+      <div class="law-box">
+        <div class="law-label">قاعدة بايز</div>
+        <div class="formula">
+          \( P\{A \mid B\} = \dfrac{P\{B \mid A\} \cdot P\{A\}}{P\{B\}} \)
         </div>
       </div>
+
+      <div class="law-box">
+        <div class="law-label">الصيغة الكاملة (مع قانون الاحتمال الكلي)</div>
+        <div class="formula">
+          \( P\{B_j \mid A\} = \dfrac{P\{A \mid B_j\} \cdot P\{B_j\}}{\displaystyle\sum_{i=1}^{k} P\{A \mid B_i\} \cdot P\{B_i\}} \)
+        </div>
+      </div>
+
+      <div class="when-box">
+        <strong>📌 متى تستخدمه</strong>
+        عندما ترى نتيجة (A) وتريد معرفة أيٌّ من الأسباب (B₁, …, Bₖ) هو الأرجح. تُستخدم في: التشخيص الطبي، فلاتر البريد العشوائي، الذكاء الاصطناعي.
+      </div>
+
+      <div style="background:rgba(74,158,255,0.07);border:1px solid rgba(74,158,255,0.2);border-radius:8px;padding:14px 18px;margin-top:14px;">
+        <p style="font-size:.82rem;color:var(--accent);letter-spacing:1px;font-weight:700;margin-bottom:6px;">💡 التفسير الحدسي</p>
+        <p style="font-size:.87rem;line-height:1.8;">
+          <span class="highlight-blue">P{Bⱼ}</span> = الاحتمال القبلي (Prior) — ما تعرفه قبل المشاهدة<br>
+          <span class="highlight-green">P{A|Bⱼ}</span> = الإمكانية (Likelihood) — كيف تفسّر Bⱼ النتيجة A<br>
+          <span class="highlight">P{Bⱼ|A}</span> = الاحتمال البعدي (Posterior) — ما تعتقده بعد رؤية A
+        </p>
+      </div>
+
     </div>
   </div>
 </div>
 
+<!-- ======================== SECTION: PROBLEMS ======================== -->
+<div id="problems" class="section">
 
-<!-- ══════════════════════════════════════════════════════════
-     REF — Quick Reference Card
-══════════════════════════════════════════════════════════ -->
-<div id="ref" class="section">
-  <div class="quiz-header">
-    <div class="qh-left">
-      <div class="quiz-num">Quick Reference Card</div>
-      <div class="quiz-title">All Key Concepts in One Place — IoT Theory Cheat Sheet</div>
-    </div>
-    <div class="quiz-date">2025 – 2026</div>
-  </div>
-
-  <!-- Architecture -->
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-arch">ARCH</span><span class="q-head-title">IoT Architecture Models — 3-Layer vs 5-Layer</span></div>
-    <div class="q-body">
-      <table class="dtable">
-        <thead><tr><th>Model</th><th>Layers</th><th>Best For</th></tr></thead>
-        <tbody>
-          <tr>
-            <td><strong style="color:var(--teal);">3-Layer</strong></td>
-            <td class="ac">Perception → Network → Application</td>
-            <td class="qc">Simple / Home IoT</td>
-          </tr>
-          <tr>
-            <td><strong style="color:var(--amber);">5-Layer</strong></td>
-            <td class="ac">Perception → Transport → Processing → Application → Business</td>
-            <td class="qc">Smart Cities / Enterprise</td>
-          </tr>
-        </tbody>
-      </table>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px;margin-top:12px;">
-        <div style="background:var(--bg4);border:1px solid rgba(0,212,200,.2);border-radius:7px;padding:11px 13px;">
-          <div style="font-family:'Space Mono',monospace;font-size:.67rem;color:var(--teal);font-weight:700;margin-bottom:5px;letter-spacing:.07em;">PERCEPTION LAYER</div>
-          <div style="font-size:.8rem;color:var(--text2);line-height:1.5;">Sensors, Actuators, Arduino/MCU, Cameras, RFID<br><span style="font-family:'Cairo',sans-serif;font-size:.78rem;color:var(--text3);">طبقة الإدراك — الواجهة مع العالم الحقيقي</span></div>
-        </div>
-        <div style="background:var(--bg4);border:1px solid rgba(74,158,255,.2);border-radius:7px;padding:11px 13px;">
-          <div style="font-family:'Space Mono',monospace;font-size:.67rem;color:var(--blue);font-weight:700;margin-bottom:5px;letter-spacing:.07em;">NETWORK LAYER</div>
-          <div style="font-size:.8rem;color:var(--text2);line-height:1.5;">Wi-Fi, Bluetooth, LoRaWAN, Zigbee, Gateways<br><span style="font-family:'Cairo',sans-serif;font-size:.78rem;color:var(--text3);">طبقة الشبكة — الجسر للإنترنت</span></div>
-        </div>
-        <div style="background:var(--bg4);border:1px solid rgba(167,139,250,.2);border-radius:7px;padding:11px 13px;">
-          <div style="font-family:'Space Mono',monospace;font-size:.67rem;color:var(--purple);font-weight:700;margin-bottom:5px;letter-spacing:.07em;">PROCESSING LAYER</div>
-          <div style="font-size:.8rem;color:var(--text2);line-height:1.5;">"Brain" — data filtering, storage, analysis<br><span style="font-family:'Cairo',sans-serif;font-size:.78rem;color:var(--text3);">طبقة المعالجة — دماغ النظام</span></div>
-        </div>
-        <div style="background:var(--bg4);border:1px solid rgba(245,166,35,.2);border-radius:7px;padding:11px 13px;">
-          <div style="font-family:'Space Mono',monospace;font-size:.67rem;color:var(--amber);font-weight:700;margin-bottom:5px;letter-spacing:.07em;">APPLICATION LAYER</div>
-          <div style="font-size:.8rem;color:var(--text2);line-height:1.5;">Dashboards, Mobile apps, Cloud APIs<br><span style="font-family:'Cairo',sans-serif;font-size:.78rem;color:var(--text3);">طبقة التطبيقات — واجهة المستخدم</span></div>
-        </div>
-        <div style="background:var(--bg4);border:1px solid rgba(255,94,108,.2);border-radius:7px;padding:11px 13px;">
-          <div style="font-family:'Space Mono',monospace;font-size:.67rem;color:var(--red);font-weight:700;margin-bottom:5px;letter-spacing:.07em;">BUSINESS LAYER</div>
-          <div style="font-size:.8rem;color:var(--text2);line-height:1.5;">Total system management, policies, business models<br><span style="font-family:'Cairo',sans-serif;font-size:.78rem;color:var(--text3);">طبقة الأعمال — إدارة النظام الكاملة</span></div>
-        </div>
+  <!-- Problem 1 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🎯</div>
+      <div>
+        <div class="card-title">مسألة 1 — الجرّة مع الكرات الملوّنة</div>
+        <div class="card-subtitle">الاحتمال الشرطي والاستقلالية</div>
       </div>
     </div>
-  </div>
+    <div class="card-body">
 
-  <!-- Interfaces -->
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-fill">COMM</span><span class="q-head-title">UART vs SPI vs I2C</span></div>
-    <div class="q-body">
-      <table class="dtable">
-        <thead><tr><th>Interface</th><th>Type</th><th>Wires</th><th>Speed</th><th>Best Use</th></tr></thead>
-        <tbody>
-          <tr>
-            <td style="color:var(--teal);font-weight:700;">UART</td>
-            <td class="ac">Asynchronous</td><td>2 (TX, RX)</td><td>Medium</td>
-            <td class="qc">GPS, Bluetooth serial, debug console</td>
-          </tr>
-          <tr>
-            <td style="color:var(--blue);font-weight:700;">SPI</td>
-            <td class="ac">Synchronous</td><td>4 (MOSI, MISO, SCK, SS)</td><td>Fast</td>
-            <td class="qc">SD card, TFT display, Flash memory</td>
-          </tr>
-          <tr>
-            <td style="color:var(--purple);font-weight:700;">I2C</td>
-            <td class="ac">Synchronous</td><td>2 (SDA, SCL)</td><td>Slow–Med</td>
-            <td class="qc">OLED, sensors, multi-device bus</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- MCU vs MPU -->
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-mcq">MCU/MPU</span><span class="q-head-title">Microcontroller vs Microprocessor</span></div>
-    <div class="q-body">
-      <table class="dtable">
-        <thead><tr><th>Property</th><th>MCU (Microcontroller)</th><th>MPU (Microprocessor)</th></tr></thead>
-        <tbody>
-          <tr><td>Memory</td><td class="ac">Built-in Flash + RAM on chip</td><td class="qc">Requires external RAM/ROM</td></tr>
-          <tr><td>Power</td><td class="ac">Very Low</td><td class="qc">High</td></tr>
-          <tr><td>Performance</td><td class="qc">Low–Medium</td><td class="ac">High (video, AI, OS)</td></tr>
-          <tr><td>Examples</td><td class="ac">Arduino, ESP8266, STM32</td><td class="qc">Raspberry Pi CPU, Intel Core</td></tr>
-          <tr><td>IoT Role</td><td class="ac">Sensors, edge nodes, simple tasks</td><td class="qc">Gateways, cameras, complex tasks</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Wireless -->
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-des">WIRELESS</span><span class="q-head-title">Wireless Technologies Comparison</span></div>
-    <div class="q-body">
-      <table class="dtable">
-        <thead><tr><th>Technology</th><th>Range</th><th>Power</th><th>Data Rate</th><th>Best For</th></tr></thead>
-        <tbody>
-          <tr><td style="color:var(--teal);font-weight:700;">Wi-Fi</td><td>~50–150m</td><td style="color:var(--red);">High</td><td>High (Mbps)</td><td class="qc">Cameras, smart TVs, high-bandwidth</td></tr>
-          <tr><td style="color:var(--blue);font-weight:700;">Bluetooth BLE</td><td>~10–50m</td><td style="color:var(--green);">Very Low</td><td>Low (Kbps)</td><td class="qc">Wearables, medical, personal devices</td></tr>
-          <tr><td style="color:var(--amber);font-weight:700;">Zigbee</td><td>~10–100m</td><td style="color:var(--green);">Very Low</td><td>Low (250Kbps)</td><td class="qc">Smart home mesh, automation</td></tr>
-          <tr><td style="color:var(--purple);font-weight:700;">LoRaWAN</td><td>up to 15 km</td><td style="color:var(--green);">Very Low</td><td>Very Low (bps)</td><td class="qc">Agriculture, smart meters, rural IoT</td></tr>
-          <tr><td style="color:var(--red);font-weight:700;">Cellular 4G/5G</td><td>km+</td><td style="color:var(--red);">High</td><td>Very High</td><td class="qc">Vehicles, mobile devices, video</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-  <!-- Protocols -->
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-tf">PROTO</span><span class="q-head-title">IoT Messaging Protocols — HTTP vs MQTT vs CoAP</span></div>
-    <div class="q-body">
-      <table class="dtable">
-        <thead><tr><th>Protocol</th><th>Model</th><th>Transport</th><th>Weight</th><th>Best For</th></tr></thead>
-        <tbody>
-          <tr><td style="color:var(--red);font-weight:700;">HTTP</td><td>Request/Response</td><td>TCP</td><td style="color:var(--red);">Heavy</td><td class="qc">Web APIs, non-battery devices</td></tr>
-          <tr><td style="color:var(--teal);font-weight:700;">MQTT</td><td>Publish/Subscribe</td><td>TCP</td><td style="color:var(--green);">Light</td><td class="qc">Battery sensors, telemetry, IoT clouds</td></tr>
-          <tr><td style="color:var(--amber);font-weight:700;">CoAP</td><td>GET/POST (REST)</td><td>UDP</td><td style="color:var(--green);">Very Light</td><td class="qc">Constrained devices, low power</td></tr>
-        </tbody>
-      </table>
-      <div class="info-box info-amber" style="margin-top:10px;">
-        <strong>MQTT Broker:</strong> Publisher → <strong>Broker (Server)</strong> → Subscriber(s) — devices never talk directly; the broker routes by topic.<br>
-        <span style="font-family:'Cairo',sans-serif;direction:rtl;display:block;margin-top:4px;">الناشر يرسل للـ Broker، والـ Broker يوزع على المشتركين حسب الموضوع (Topic)</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Communication Models -->
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-mcq">MODELS</span><span class="q-head-title">IoT Communication Models — D2D · D2C · D2G</span></div>
-    <div class="q-body">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:11px;">
-        <div style="background:var(--bg4);border:1px solid rgba(0,212,200,.2);border-radius:8px;padding:13px 15px;">
-          <div style="font-family:'Space Mono',monospace;font-size:.72rem;color:var(--teal);font-weight:700;margin-bottom:7px;">D2D — Device to Device</div>
-          <div style="font-size:.82rem;color:var(--text);margin-bottom:5px;">Devices communicate directly — locally, no internet needed.</div>
-          <div style="font-size:.76rem;color:var(--text3);">✦ Bluetooth, Zigbee &nbsp;✦ No cloud<br>Example: smartwatch ↔ phone</div>
-        </div>
-        <div style="background:var(--bg4);border:1px solid rgba(74,158,255,.2);border-radius:8px;padding:13px 15px;">
-          <div style="font-family:'Space Mono',monospace;font-size:.72rem;color:var(--blue);font-weight:700;margin-bottom:7px;">D2C — Device to Cloud</div>
-          <div style="font-size:.82rem;color:var(--text);margin-bottom:5px;">Device connects directly to cloud server via internet.</div>
-          <div style="font-size:.76rem;color:var(--text3);">✦ Wi-Fi or Cellular &nbsp;✦ AWS, Azure<br>Example: thermostat → AWS server</div>
-        </div>
-        <div style="background:var(--bg4);border:1px solid rgba(245,166,35,.2);border-radius:8px;padding:13px 15px;">
-          <div style="font-family:'Space Mono',monospace;font-size:.72rem;color:var(--amber);font-weight:700;margin-bottom:7px;">D2G — Device to Gateway</div>
-          <div style="font-size:.82rem;color:var(--text);margin-bottom:5px;">Device uses local protocol → Gateway bridges to internet.</div>
-          <div style="font-size:.76rem;color:var(--text3);">✦ Zigbee/BLE device + Wi-Fi GW<br>Example: watch → phone → hospital</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ══════════════════════════════════════════════════════════
-     DEPLOY — GitHub Pages Guide (embedded in single file)
-══════════════════════════════════════════════════════════ -->
-<div id="dep" class="section">
-  <div class="quiz-header">
-    <div class="qh-left">
-      <div class="quiz-num">🚀 GitHub Pages</div>
-      <div class="quiz-title">How to Deploy This File as a Free Website — 3 Steps</div>
-    </div>
-    <div class="quiz-date">Free Forever</div>
-  </div>
-
-  <div class="info-box info-green" style="margin-bottom:20px;font-size:.88rem;">
-    ✓ <strong>This is a single HTML file</strong> — no build tools, no framework, no server needed.<br>
-    Upload one file and your site is live on GitHub Pages in under 5 minutes.
-  </div>
-
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-fill">STEP 1</span><span class="q-head-title">Create a GitHub Repository</span></div>
-    <div class="q-body">
-      <div class="fill-list">
-        <div class="fill-item"><span class="fill-num" style="color:var(--teal);">①</span><div>
-          <div class="fill-q">Go to <strong style="color:var(--teal)">github.com</strong> → Sign up for free (or Log in)</div>
-        </div></div>
-        <div class="fill-item"><span class="fill-num" style="color:var(--teal);">②</span><div>
-          <div class="fill-q">Click the <strong>+</strong> icon (top right) → <strong>New repository</strong></div>
-        </div></div>
-        <div class="fill-item"><span class="fill-num" style="color:var(--teal);">③</span><div>
-          <div class="fill-q">Name: <code style="color:var(--amber);background:var(--bg4);padding:2px 8px;border-radius:4px;">iot-quiz-solutions</code> → Set to <strong>Public</strong> → Click <strong>Create repository</strong></div>
-          <div class="fill-note">⚠️ Repository MUST be Public for free GitHub Pages hosting</div>
-        </div></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-fill">STEP 2</span><span class="q-head-title">Upload This HTML File</span></div>
-    <div class="q-body">
-      <div class="sdiv"><div class="sdiv-line"></div><span class="sdiv-txt">Option A — Drag &amp; Drop (no Git needed)</span><div class="sdiv-line"></div></div>
-      <div class="fill-list">
-        <div class="fill-item"><span class="fill-num" style="color:var(--blue);">①</span><div>
-          <div class="fill-q">In your new repo → click <strong>Add file</strong> → <strong>Upload files</strong></div>
-        </div></div>
-        <div class="fill-item"><span class="fill-num" style="color:var(--blue);">②</span><div>
-          <div class="fill-q">Drag this file into the upload box — rename it to exactly: <code style="color:var(--teal);background:var(--bg4);padding:2px 8px;border-radius:4px;">index.html</code></div>
-          <div class="fill-note">The file MUST be named <strong>index.html</strong> for GitHub Pages to serve it as the homepage</div>
-        </div></div>
-        <div class="fill-item"><span class="fill-num" style="color:var(--blue);">③</span><div>
-          <div class="fill-q">Scroll down → click <strong style="color:var(--green)">Commit changes</strong></div>
-        </div></div>
+      <div class="problem-box">
+        <div class="prob-label">نص المسألة</div>
+        <p>
+          جرّة تحتوي: <span class="highlight">2 أحمر كبير</span>، <span class="highlight">1 أحمر صغير</span>، <span class="highlight-blue">3 أزرق كبير</span>، <span class="highlight-blue">1 أزرق صغير</span> (7 كرات إجمالاً)<br><br>
+          أ) ما احتمال سحب كرة حمراء؟ زرقاء؟ صغيرة؟ كبيرة؟<br>
+          ب) ما احتمال سحب حمراء إذا علمت أنها صغيرة؟<br>
+          ج) ما احتمال سحب صغيرة إذا علمت أنها زرقاء؟
+        </p>
       </div>
 
-      <div class="sdiv" style="margin-top:16px;"><div class="sdiv-line"></div><span class="sdiv-txt">Option B — Git CLI</span><div class="sdiv-line"></div></div>
-      <div class="code-block">
-        <span class="cm"># Rename file to index.html first, then:</span><br>
-        <span class="kw">git</span> init<br>
-        <span class="kw">git</span> add index.html<br>
-        <span class="kw">git</span> commit -m <span class="val">"Add IoT quiz solutions"</span><br>
-        <span class="kw">git</span> branch -M main<br>
-        <span class="kw">git</span> remote add origin https://github.com/<span class="val">YOUR-USERNAME</span>/iot-quiz-solutions.git<br>
-        <span class="kw">git</span> push -u origin main
-      </div>
-    </div>
-  </div>
-
-  <div class="q-card">
-    <div class="q-head"><span class="q-tag tag-des">STEP 3</span><span class="q-head-title">Enable GitHub Pages</span></div>
-    <div class="q-body">
-      <div class="fill-list">
-        <div class="fill-item"><span class="fill-num" style="color:var(--green);">①</span><div>
-          <div class="fill-q">In your repo → click <strong>Settings</strong> tab (top, with ⚙️ icon)</div>
-        </div></div>
-        <div class="fill-item"><span class="fill-num" style="color:var(--green);">②</span><div>
-          <div class="fill-q">Left sidebar → scroll down → click <strong>Pages</strong></div>
-        </div></div>
-        <div class="fill-item"><span class="fill-num" style="color:var(--green);">③</span><div>
-          <div class="fill-q">Source → <strong>Deploy from a branch</strong> | Branch: <strong>main</strong> | Folder: <strong>/ (root)</strong> → click <strong>Save</strong></div>
-        </div></div>
-        <div class="fill-item"><span class="fill-num" style="color:var(--green);">④</span><div>
-          <div class="fill-q">Wait ~2 minutes → Your site will be live at:</div>
-          <div style="margin-top:7px;font-family:'Space Mono',monospace;font-size:.78rem;color:var(--teal);background:var(--teal-dim);padding:9px 14px;border-radius:6px;border:1px solid rgba(0,212,200,.3);">
-            https://<span style="color:var(--amber)">your-username</span>.github.io/iot-quiz-solutions/
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> عرض الحل
+      </button>
+      <div class="solution-body">
+        <div class="step">
+          <div class="step-num">أ</div>
+          <div class="step-content">
+            المجموع = 7 كرات<br>
+            <div class="math-line">
+              P{أحمر} = 3/7 &nbsp;&nbsp; P{أزرق} = 4/7<br>
+              P{صغيرة} = 2/7 &nbsp;&nbsp; P{كبيرة} = 5/7
+            </div>
           </div>
-        </div></div>
-      </div>
-      <div class="info-box info-green" style="margin-top:16px;">
-        <strong>✓ 100% Free · No credit card · No expiry · No server maintenance</strong><br>
-        GitHub Pages stays live as long as your repository exists. Share the link with your classmates!
+        </div>
+        <div class="step">
+          <div class="step-num">ب</div>
+          <div class="step-content">
+            P{أحمر | صغيرة} = P{أحمر ∩ صغيرة} / P{صغيرة}<br>
+            عدد الأحمر الصغير = 1 ← P{أحمر ∩ صغيرة} = 1/7
+            <div class="math-line">\( P\{\text{أحمر} \mid \text{صغيرة}\} = \dfrac{1/7}{2/7} = \dfrac{1}{2} \)</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">ج</div>
+          <div class="step-content">
+            P{صغيرة | زرقاء} = P{صغيرة ∩ زرقاء} / P{زرقاء}<br>
+            عدد الزرقاء الصغيرة = 1 ← P{صغيرة ∩ زرقاء} = 1/7
+            <div class="math-line">\( P\{\text{صغيرة} \mid \text{زرقاء}\} = \dfrac{1/7}{4/7} = \dfrac{1}{4} \)</div>
+          </div>
+        </div>
+        <div class="answer-box">
+          <strong>ملاحظة مهمة:</strong> في هذه الجرّة، اللون والحجم <span style="color:var(--red)">غير مستقلَّين</span> لأن P{أحمر|صغيرة}=1/2 ≠ P{أحمر}=3/7
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- Problem 2 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🎲</div>
+      <div>
+        <div class="card-title">مسألة 2 — النرد وجرّتان</div>
+        <div class="card-subtitle">قانون الاحتمال الكلي</div>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="problem-box">
+        <div class="prob-label">نص المسألة</div>
+        <p>
+          <strong>الجرّة 1:</strong> 3 حمراء + 7 خضراء &nbsp;|&nbsp; <strong>الجرّة 2:</strong> 5 حمراء + 5 بيضاء<br><br>
+          أرمي نرداً عادلاً: إذا ظهر 3 أو 5 → أسحب من الجرّة 1، وإلا → أسحب من الجرّة 2.<br>
+          احسب احتمال أن تكون الكرة المسحوبة غير حمراء.
+        </p>
+      </div>
+
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> عرض الحل
+      </button>
+      <div class="solution-body">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            تحديد الأحداث:
+            <div class="math-line">
+              B₁ = اختيار الجرّة 1 &nbsp; (النرد = 3 أو 5) → P{B₁} = 2/6 = 1/3<br>
+              B₂ = اختيار الجرّة 2 &nbsp; (النرد ≠ 3,5) → P{B₂} = 4/6 = 2/3
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            الاحتمالات الشرطية (غير حمراء):
+            <div class="math-line">
+              P{غير حمراء | B₁} = 7/10 &nbsp; (من الجرّة 1)<br>
+              P{غير حمراء | B₂} = 5/10 = 1/2 &nbsp; (من الجرّة 2)
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            تطبيق قانون الاحتمال الكلي:
+            <div class="math-line">
+              \( P\{\text{غير حمراء}\} = P\{\cdot \mid B_1\}P\{B_1\} + P\{\cdot \mid B_2\}P\{B_2\} \)
+            </div>
+            <div class="math-line">
+              \( = \dfrac{7}{10} \cdot \dfrac{1}{3} + \dfrac{1}{2} \cdot \dfrac{2}{3} = \dfrac{7}{30} + \dfrac{10}{30} = \dfrac{17}{30} \)
+            </div>
+          </div>
+        </div>
+        <div class="answer-box"><strong>الجواب:</strong> P{غير حمراء} = 17/30 ≈ 0.567</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Problem 3 -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">🏺</div>
+      <div>
+        <div class="card-title">مسألة 3 — ثلاث جرار وقاعدة بايز</div>
+        <div class="card-subtitle">قانون الاحتمال الكلي + قاعدة بايز</div>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="problem-box">
+        <div class="prob-label">نص المسألة</div>
+        <p>
+          <strong>الجرّة 1:</strong> 2 أحمر + 3 أزرق + 5 أبيض (10 كرات)<br>
+          <strong>الجرّة 2:</strong> 5 أحمر + 1 أزرق + 4 أبيض (10 كرات)<br>
+          <strong>الجرّة 3:</strong> 3 أحمر + 7 أسود (10 كرات)<br><br>
+          أرمي نرداً: {1,2} → جرّة 1، {3} → جرّة 2، {4,5,6} → جرّة 3<br>
+          أ) ما احتمال سحب كرة سوداء؟<br>
+          ب) ما احتمال سحب كرة حمراء؟<br>
+          ج) إذا سُحبت حمراء، ما احتمال أن النرد أعطى 3؟
+        </p>
+      </div>
+
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> عرض الحل
+      </button>
+      <div class="solution-body">
+
+        <div class="step">
+          <div class="step-num">setup</div>
+          <div class="step-content">
+            احتمالات اختيار الجرّة:
+            <div class="math-line">
+              P{B₁} = 2/6 = 1/3 &nbsp;|&nbsp; P{B₂} = 1/6 &nbsp;|&nbsp; P{B₃} = 3/6 = 1/2
+            </div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">أ</div>
+          <div class="step-content">
+            الكرة السوداء توجد فقط في الجرّة 3:
+            <div class="math-line">
+              \( P\{\text{أسود} \mid B_1\} = 0, \quad P\{\text{أسود} \mid B_2\} = 0, \quad P\{\text{أسود} \mid B_3\} = 7/10 \)
+            </div>
+            <div class="math-line">
+              \( P\{\text{أسود}\} = 0 \cdot \dfrac{1}{3} + 0 \cdot \dfrac{1}{6} + \dfrac{7}{10} \cdot \dfrac{1}{2} = \dfrac{7}{20} = 0.35 \)
+            </div>
+            <div class="answer-box"><strong>الجواب أ:</strong> P{أسود} = 7/20 = 0.35</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">ب</div>
+          <div class="step-content">
+            <div class="math-line">
+              P{أحمر|B₁} = 2/10 &nbsp;|&nbsp; P{أحمر|B₂} = 5/10 &nbsp;|&nbsp; P{أحمر|B₃} = 3/10
+            </div>
+            <div class="math-line">
+              \( P\{\text{أحمر}\} = \dfrac{2}{10}\cdot\dfrac{1}{3} + \dfrac{5}{10}\cdot\dfrac{1}{6} + \dfrac{3}{10}\cdot\dfrac{1}{2} \)
+            </div>
+            <div class="math-line">
+              \( = \dfrac{2}{30} + \dfrac{5}{60} + \dfrac{3}{20} = \dfrac{4}{60} + \dfrac{5}{60} + \dfrac{9}{60} = \dfrac{18}{60} = \dfrac{3}{10} \)
+            </div>
+            <div class="answer-box"><strong>الجواب ب:</strong> P{أحمر} = 3/10 = 0.3</div>
+          </div>
+        </div>
+
+        <div class="step">
+          <div class="step-num">ج</div>
+          <div class="step-content">
+            نريد P{B₂ | أحمر} — نستخدم قاعدة بايز:<br>
+            <div class="math-line">
+              \( P\{B_2 \mid \text{أحمر}\} = \dfrac{P\{\text{أحمر} \mid B_2\} \cdot P\{B_2\}}{P\{\text{أحمر}\}} \)
+            </div>
+            <div class="math-line">
+              \( = \dfrac{\dfrac{5}{10} \cdot \dfrac{1}{6}}{\dfrac{3}{10}} = \dfrac{\dfrac{5}{60}}{\dfrac{18}{60}} = \dfrac{5}{18} \)
+            </div>
+            <div class="answer-box"><strong>الجواب ج:</strong> P{B₂ | أحمر} = 5/18 ≈ 0.278</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Problem 4: Independence check -->
+  <div class="card">
+    <div class="card-header">
+      <div class="card-icon">✅</div>
+      <div>
+        <div class="card-title">مسألة 4 — فحص الاستقلالية</div>
+        <div class="card-subtitle">الجرّة بالكرات المتوازنة</div>
+      </div>
+    </div>
+    <div class="card-body">
+
+      <div class="problem-box">
+        <div class="prob-label">نص المسألة</div>
+        <p>
+          جرّة تحتوي: <span class="highlight">2 أحمر كبير</span>، <span class="highlight">2 أحمر صغير</span>، <span class="highlight-blue">3 أزرق كبير</span>، <span class="highlight-blue">3 أزرق صغير</span> (10 كرات)<br><br>
+          أ) ما احتمال سحب حمراء؟ زرقاء؟ صغيرة؟ كبيرة؟<br>
+          ب) ما احتمال سحب حمراء إذا علمت أنها صغيرة؟<br>
+          ج) ما احتمال سحب صغيرة إذا علمت أنها زرقاء؟<br>
+          د) هل اللون والحجم مستقلان؟
+        </p>
+      </div>
+
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> عرض الحل
+      </button>
+      <div class="solution-body">
+        <div class="step">
+          <div class="step-num">أ</div>
+          <div class="step-content">
+            <div class="math-line">
+              P{أحمر} = 4/10 = 2/5 &nbsp;|&nbsp; P{أزرق} = 6/10 = 3/5<br>
+              P{صغيرة} = 5/10 = 1/2 &nbsp;|&nbsp; P{كبيرة} = 5/10 = 1/2
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">ب</div>
+          <div class="step-content">
+            عدد الأحمر الصغيرة = 2
+            <div class="math-line">
+              \( P\{\text{أحمر} \mid \text{صغيرة}\} = \dfrac{2/10}{5/10} = \dfrac{2}{5} \)
+            </div>
+            P{أحمر|صغيرة} = 2/5 = P{أحمر} ✓
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">ج</div>
+          <div class="step-content">
+            عدد الأزرق الصغيرة = 3
+            <div class="math-line">
+              \( P\{\text{صغيرة} \mid \text{زرقاء}\} = \dfrac{3/10}{6/10} = \dfrac{1}{2} \)
+            </div>
+            P{صغيرة|زرقاء} = 1/2 = P{صغيرة} ✓
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">د</div>
+          <div class="step-content">
+            <div class="answer-box">
+              <strong>نعم، اللون والحجم مستقلان!</strong><br>
+              P{أحمر|صغيرة} = P{أحمر} = 2/5 &nbsp; ✓<br>
+              معرفة حجم الكرة لا تغيّر احتمال لونها
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end problems section -->
 
 </main>
 
-<!-- ══════════════ FOOTER ══════════════ -->
-<footer>
-  <div class="footer-grid">
-    <div><div class="footer-item-lbl">University</div><div class="footer-item-val">جامعة تكريت</div></div>
-    <div class="footer-sep"></div>
-    <div><div class="footer-item-lbl">College</div><div class="footer-item-val">علوم الحاسوب والرياضيات</div></div>
-    <div class="footer-sep"></div>
-    <div><div class="footer-item-lbl">Course</div><div class="footer-item-val" style="font-family:'Syne',sans-serif;">Internet of Things — Theory</div></div>
-    <div class="footer-sep"></div>
-    <div><div class="footer-item-lbl">Stage / Year</div><div class="footer-item-val" style="font-family:'Space Mono',monospace;font-size:.82rem;">3rd Stage · 2025–2026</div></div>
-  </div>
-  <div style="height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin-bottom:1rem;"></div>
-  <p class="footer-copy">
-    All answers extracted from official quiz answer sheets &nbsp;·&nbsp;
-    6 Daily Quizzes · 8 Sections · Single HTML File — GitHub Pages Ready
-  </p>
-</footer>
-
 <script>
-/* ── Tab navigation ── */
-function go(id) {
+function showSection(id, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  const sec = document.getElementById(id);
-  if (sec) sec.classList.add('active');
-  document.querySelectorAll('.tab-btn').forEach(b => {
-    if ((b.getAttribute('onclick') || '').includes("'" + id + "'"))
-      b.classList.add('active');
-  });
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (window.MathJax) MathJax.typesetPromise();
 }
 
-/* ── Alt+1…8 keyboard shortcuts ── */
-document.addEventListener('keydown', e => {
-  if (!e.altKey) return;
-  const map = {'1':'q1','2':'q2','3':'q3','4':'q4','5':'q5','6':'q6','7':'ref','8':'dep'};
-  if (map[e.key]) { e.preventDefault(); go(map[e.key]); }
+function toggleSolution(btn) {
+  const body = btn.nextElementSibling;
+  const isOpen = body.classList.contains('show');
+  body.classList.toggle('show');
+  btn.classList.toggle('open');
+  btn.querySelector('.arrow').textContent = isOpen ? '▶' : '▼';
+  btn.childNodes[1].textContent = isOpen ? ' عرض الحل' : ' إخفاء الحل';
+  if (!isOpen && window.MathJax) MathJax.typesetPromise([body]);
+}
+
+// Trigger MathJax on load
+window.addEventListener('load', () => {
+  if (window.MathJax) MathJax.typesetPromise();
 });
 </script>
+
 </body>
 </html>
